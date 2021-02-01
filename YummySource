@@ -67,7 +67,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
             sectionBackgroundTransparency = 1;
             toggleImage = "rbxassetid://1202200114";
             rippleImage = "rbxassetid://2708891598";
-            borderRainbow = false;
+            borderRainbow = true;
         };
     end
 
