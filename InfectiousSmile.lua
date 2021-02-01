@@ -1,7 +1,4 @@
---Script made by Boxking776.
---Yes, I separate my code into chunks. No need to tell me that I'm retarded; I already know.
-
-local library = loadstring(game:HttpGet("https://pastebin.com/raw/5hTCvJ7V",true))()
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/YummySource",true))()
 
 ------------------------------------------------------------------------------
 
