@@ -1,3 +1,5 @@
+--yes i am Boxking776, unless you are a developer, you shouldn't be here >:( go away
+
 local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("Players").LocalPlayer.PlayerGui or game:GetService('CoreGui');
     local Heartbeat = game:GetService("RunService").Heartbeat;
     local TweenService = game:GetService("TweenService");
