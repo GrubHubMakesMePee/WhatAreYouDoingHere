@@ -138,10 +138,8 @@ Icon = "rbxassetid://1299491401";
 Duration = 3;
 })
 wait(3)
-lp:Kick("Wrong Key, Or an error occoured. Please contact Boxking776#0001.")
 
-
-wait(0.1)
+game.Players.LocalPlayer:Kick("Wrong Key, Or an error occoured. Please contact Boxking776#0001.")
 
 end
 end)
