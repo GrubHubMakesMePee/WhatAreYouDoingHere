@@ -111,10 +111,9 @@ Icon = "rbxassetid://1299491401";
 Duration = 3;
 })
 
-if Keytext == 'yourmomyourmom' then
+if Keytext == '8JDJHjhvd8JHVjskj' then
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua"))()
-
 
 game.StarterGui:SetCore("SendNotification", {
 Title = "GrubHub";
@@ -123,11 +122,49 @@ Icon = "rbxassetid://1299491401";
 Duration = 3;
 })
 
-    
 wait(0.1)
 
 
 KeyScreen:Destroy()
+
+
+else
+if Keytext == 'PermHelperKey532pGt6X6peKXI9Hor78' then
+    
+loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua"))()
+
+game.StarterGui:SetCore("SendNotification", {
+Title = "GrubHub";
+Text = "Correct Key";
+Icon = "rbxassetid://1299491401";
+Duration = 3;
+})
+wait(0.1)
+
+KeyScreen:Destroy()
+
+else
+if Keytext == 'Never Gonna Give You Up' then
+
+wait(0.1)
+
+KeyScreen:Destroy()
+
+game.Players.LocalPlayer:Kick("Never Gonna Let You Down")
+
+
+else
+if Keytext == 'GrubHub Perks give you deals on the Scripts you love' then
+
+wait(0.1)
+
+game.StarterGui:SetCore("SendNotification", {
+Title = "GrubHub";
+Text = "The kind that make you Boogie";
+Icon = "rbxassetid://1299491401";
+Duration = 3;
+})
+
 
 else
 
@@ -137,9 +174,12 @@ Text = "Wrong Key";
 Icon = "rbxassetid://1299491401";
 Duration = 3;
 })
-wait(3)
+wait(2)
 
 game.Players.LocalPlayer:Kick("Wrong Key, Or an error occoured. Please contact Boxking776#0001.")
 
+end
+end
+end
 end
 end)
