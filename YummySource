@@ -455,6 +455,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
             end
 
             self:Resize();
+            return Toggle;
         end;
         
         function window:Section(name)
