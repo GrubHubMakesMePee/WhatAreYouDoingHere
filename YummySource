@@ -428,7 +428,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
                 library.flags[name] = toggle;
                 callback(toggle);
             end);
-            
+
             self:Resize();
         end;
         
