@@ -429,33 +429,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
                 callback(toggle);
             end);
             
-            local function Toggle:SetTo(setTo)
-                toggle = setTo;
-
-                if toggle then
-                    Frame:TweenPosition(UDim2.new(0, 10, 0, -25), 'Out', 'Linear', .3, true)
-                else
-                    Frame:TweenPosition(UDim2.new(0, 0,0, 0), 'Out', 'Linear', .3, true)
-                end;
-
-                library.flags[name] = toggle;
-                callback(toggle);
-            end
-
-            local function Toggle:SetToNoUpdate(setTo)
-                toggle = setTo;
-
-                if toggle then
-                    Frame:TweenPosition(UDim2.new(0, 10, 0, -25), 'Out', 'Linear', .3, true)
-                else
-                    Frame:TweenPosition(UDim2.new(0, 0,0, 0), 'Out', 'Linear', .3, true)
-                end;
-
-                library.flags[name] = toggle;
-            end
-
             self:Resize();
-            return Toggle;
         end;
         
         function window:Section(name)
