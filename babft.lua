@@ -3,6 +3,38 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/StopR
 local main = library:CreateWindow('Main')
 local Items = library:CreateWindow('Items')
 local Teams = library:CreateWindow('Teams')
+
+noclip = false
+game:GetService('RunService').Stepped:connect(function()
+if noclip then
+game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+end
+end)
+plr = game.Players.LocalPlayer
+mouse = plr:GetMouse()
+mouse.KeyDown:connect(function(key)
+if key == "o" then
+noclip = not noclip
+game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+end
+end)
+
+
+local WalkingSlider = main:Slider('Walk Speed Adjuster', {min = 16, max = 200, default = 16}, function(value)
+    game:GetService('Players').LocalPlayer.Character.Humanoid.WalkSpeed = value
+end)
+
+
+
+local JumpingSlider = main:Slider('Jump Power Adjuster', {min = 50, max = 300, default = 50}, function(value)
+    game:GetService('Players').LocalPlayer.Character.Humanoid.JumpPower = value
+end)
+
+local HipSlider = main:Slider('HipHeight Adjuster', {min = 0.5, max = 100, default = 0.5}, function(value)
+    game:GetService('Players').LocalPlayer.Character.Humanoid.HipHeight = value
+end)
+
+
  
 local Feature = main:Button('Infinite Blocks', function()
     
@@ -556,3 +588,95 @@ local A_1 = "PenguinCharacter"
 local Event = game:GetService("Workspace").ChangeCharacter
 Event:FireServer(A_1)
 end)
+
+local Meme = main:Toggle('Noclip', function(state)
+    
+
+if state then
+    
+    noclip = true
+    
+         wait(0.1)
+game.StarterGui:SetCore("SendNotification", {
+Title = "GrubHub";
+Text = "Enabled";
+Icon = "rbxassetid://1299491401";
+Duration = 3;
+})
+    
+else
+    
+    noclip = false
+
+         wait(0.1)
+game.StarterGui:SetCore("SendNotification", {
+Title = "Disabled";
+Icon = "rbxassetid://1299491401";
+Duration = 3;
+})
+
+end
+end)
+
+
+local Meme = main:Button('Autofarm', function()
+while true do
+    wait(0.1)
+    
+
+
+game:GetService('Players').LocalPlayer.Character.Humanoid.HipHeight = 69
+wait(0.1)
+
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,1360)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,1606)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,2110)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,2356)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,2860)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,3610)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,3856)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,4360)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,4606)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,5111)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,5356)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,5860)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,6106)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,6610)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,6857)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,7360)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,7606)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,8110)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x,y,8356)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-51.5658951, 23.603878, 8576.83789)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-54.326313, -334.156006, 8919.47363)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-58.3624916, -360.209442, 9490.91016)
+wait(0.1)
+game:GetService('Players').LocalPlayer.Character.Humanoid.HipHeight = 1
+wait(18)
+    
+    end
+end)
+
+
