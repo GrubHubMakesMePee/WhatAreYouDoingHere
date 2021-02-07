@@ -209,6 +209,10 @@ local OffButton = main:Toggle('Deactivate on Player Join', function(o)
     autooff = o
 end, autooff)
 
+local Farm = Autofarming:Button('Open Main UI', function()	
+loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/BeeSwarmGood.lua",true))()
+end)
+
 --[[local CloseButton = main:Button('Remove GUI', function()
 pollen = false
 tokens = false
