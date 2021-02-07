@@ -146,7 +146,7 @@ KeyScreen:Destroy()
 else
 
 
-if Keytext == 'Mootje1009' then
+if Keytext == 'ntowashere' then
     
 loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua"))()
 
