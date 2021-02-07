@@ -209,6 +209,22 @@ local OffButton = main:Toggle('Deactivate on Player Join', function(o)
     autooff = o
 end, autooff)
 
+local AFK = main:Toggle('Anti-Afk', function()
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+wait(0.1)
+game.StarterGui:SetCore("SendNotification", {
+Title = "GrubHub";
+Text = "Anti-Afk on";
+Icon = "rbxassetid://1299491401";
+Duration = 5;
+})
+end)
+
 local Farm = main:Button('Open Main UI', function()	
 loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/BeeSwarmGood.lua",true))()
 end)
