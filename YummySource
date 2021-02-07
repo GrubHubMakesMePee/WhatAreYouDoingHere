@@ -68,7 +68,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
             sectionBackgroundTransparency = 1;
             toggleImage = "rbxassetid://1202200114";
             rippleImage = "rbxassetid://2708891598";
-            borderRainbow = true; ----------------------------------------------------------- CHANGE RAINBOW SETTINGS HERE
+            borderRainbow = false; ----------------------------------------------------------- CHANGE RAINBOW SETTINGS HERE
         };
     end
 
@@ -369,7 +369,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
             return Box;
         end;
         
-        function window:Toggle(name, callback)
+        function window:Toggle(name, callback, default)
             assert(type(name) == "string", "You need to input a name. (string)");
             local callback = callback or function() end;
             
@@ -414,7 +414,18 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
             Frame.BorderSizePixel = 0
             Frame.Size = UDim2.new(0, 25, 0, 25)
             
-            local toggle = false;
+            if not default then
+                default = false
+            end
+
+            local toggle = default or false;
+
+            if toggle then
+                Frame:TweenPosition(UDim2.new(0, 10, 0, -25), 'Out', 'Linear', .3, true)
+            end;
+
+            library.flags[name] = toggle;
+            callback(toggle);
 
             Toggle.MouseButton1Click:Connect(function()
                 toggle = not toggle;
@@ -428,8 +439,9 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
                 library.flags[name] = toggle;
                 callback(toggle);
             end);
-
+            
             self:Resize();
+            return Toggle;
         end;
         
         function window:Section(name)
