@@ -963,6 +963,6 @@ act5 == false
 
 end)
 			
-local Farm = main:Button('Open Farming UI', function()	
+local Farm = Autofarming:Button('Open Farming UI', function()	
 loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/BSSAuto",true))()
 end)
