@@ -2,8 +2,8 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/StopR
 
 ------------------------------------------------------------------------------
 
-local main = library:CreateWindow('Infectious Smile')
-local main2 = library:CreateWindow('Infectious Smile')
+local main = library:CreateWindow('Main')
+local main2 = library:CreateWindow('Main')
 
 
 local Farming = main:Section('Farming')
