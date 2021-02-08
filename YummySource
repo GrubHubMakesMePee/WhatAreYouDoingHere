@@ -1,3 +1,5 @@
+--yes i am Boxking776, unless you are a developer, you shouldn't be here >:( go away
+
 local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("Players").LocalPlayer.PlayerGui or game:GetService('CoreGui');
     local Heartbeat = game:GetService("RunService").Heartbeat;
     local TweenService = game:GetService("TweenService");
@@ -53,6 +55,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
             borderRainbow = _G.borderRainbow;
         };
     else
+    ----------------------------------------------------------- Setings
         library.Settings = {
             textColor = Color3.fromRGB(255, 255, 255);
             buttonColor = Color3.fromRGB(35, 35, 35);
@@ -65,7 +68,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
             sectionBackgroundTransparency = 1;
             toggleImage = "rbxassetid://1202200114";
             rippleImage = "rbxassetid://2708891598";
-            borderRainbow = false;
+            borderRainbow = false; ----------------------------------------------------------- CHANGE RAINBOW SETTINGS HERE
         };
     end
 
@@ -143,8 +146,11 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
     function library:CreateWindow(name)
         assert(type(name) == "string", "You need to input a name. (string)");
 
+        local minimised = false;
+
         local Window = Instance.new("Frame")
         local WindowName = Instance.new("TextLabel")
+        local Minimise = Instance.new("TextButton")
 
         Window.Name = "Window"
         Window.Parent = library.gui
@@ -154,6 +160,8 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
         Window.Position = UDim2.new(0, 150 + (190 * self.WindowCount), 0, (Window.Size.Y.Offset / 2) + 50)
         Window.Size = UDim2.new(0, 180, 0, 0)
         
+		
+		
         WindowName.Name = "WindowName"
         WindowName.Parent = Window
         WindowName.BackgroundColor3 = Color3.new(0.137255, 0.137255, 0.137255)
@@ -165,6 +173,8 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
         WindowName.TextColor3 = library.Settings.textColor
         WindowName.TextSize = 25
 
+        
+		
         dragger.new(Window, WindowName);
 
         local Container = Instance.new("ScrollingFrame")
@@ -203,6 +213,32 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
         local window = {};
         window.Count = self.WindowCount;
         window.Container = Container;
+		window.minimised = minimised;
+
+		local function minimise()
+            if minimised then
+                for _,v in pairs(Window:GetChildren()) do if v.Visible ~= nil and v.Name ~= "Minimise" and v.Name ~= "WindowName" then v.Visible = true end end
+            else
+                for _,v in pairs(Window:GetChildren()) do if v.Visible ~= nil and v.Name ~= "Minimise" and v.Name ~= "WindowName" then v.Visible = false end end                
+            end
+			minimised = not minimised
+			window.minimised = minimised
+			window:Resize()
+        end
+		
+		Minimise.Name = "Minimise"
+        Minimise.Parent = Window
+        Minimise.BackgroundColor3 = Color3.new(0.137255, 0.137255, 0.137255)
+        Minimise.BorderColor3 = Color3.new(0.337255, 0.337255, 0.337255)
+        Minimise.Position = UDim2.new(1, -35, 0, -35)
+        Minimise.Size = UDim2.new(0, 35, 0, 35)
+        Minimise.Font = Enum.Font.SourceSans
+        Minimise.Text = "_"
+        Minimise.TextColor3 = library.Settings.textColor
+        Minimise.TextSize = 25
+		Minimise.MouseButton1Click:Connect(function()
+		    minimise()
+		end)
 
         self.WindowCount = self.WindowCount + 1;
         
@@ -222,6 +258,8 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
                 Heartbeat:Wait()
             end;
         end);
+
+       
 
         function window:btnRipple(btn)
             spawn(function()
@@ -269,7 +307,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
             end;
 
             local Size = UDim2.new(0, 180, 0, (count * 33) - 25);
-
+            if not Container.Visible then Size = UDim2.new(0, 180, 0, 0); end
             if Size.Y.Offset >= 400 then
                 Container.CanvasSize = UDim2.new(0, 0, 0, Size.Y.Offset);
                 Window.Size = UDim2.new(0, 180, 0, 400);
@@ -366,7 +404,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
             return Box;
         end;
         
-        function window:Toggle(name, callback)
+        function window:Toggle(name, callback, default)
             assert(type(name) == "string", "You need to input a name. (string)");
             local callback = callback or function() end;
             
@@ -411,7 +449,18 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
             Frame.BorderSizePixel = 0
             Frame.Size = UDim2.new(0, 25, 0, 25)
             
-            local toggle = false;
+            if not default then
+                default = false
+            end
+
+            local toggle = default;
+
+            if toggle then
+                Frame:TweenPosition(UDim2.new(0, 10, 0, -25), 'Out', 'Linear', .3, true)
+                library.flags[name] = toggle;
+                callback(toggle);
+            end;
+
 
             Toggle.MouseButton1Click:Connect(function()
                 toggle = not toggle;
@@ -425,8 +474,9 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
                 library.flags[name] = toggle;
                 callback(toggle);
             end);
-
+            
             self:Resize();
+            return Toggle;
         end;
         
         function window:Section(name)
