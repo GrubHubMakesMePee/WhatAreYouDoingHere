@@ -103,7 +103,7 @@ local SHout = main:Box('Serverwide Shout', 'Text', function(value)
 end)
 
 
-local SHoutButton = main:Button('Say The Funny', function()
+local SHoutButton = main:Button('Shout', function()
 local Text2Shout = SHout.Text
     
 local args = {
