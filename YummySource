@@ -237,7 +237,6 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
         Minimise.TextColor3 = library.Settings.textColor
         Minimise.TextSize = 25
 	    Minimise.BorderSizePixel = 0
-	    Minimise.BackroundTransparency = 1
 		Minimise.MouseButton1Click:Connect(function()
 		    minimise()
 		end)
