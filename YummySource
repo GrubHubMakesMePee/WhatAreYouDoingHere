@@ -233,7 +233,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
         Minimise.Position = UDim2.new(1, -35, 0, -35)
         Minimise.Size = UDim2.new(0, 35, 0, 35)
         Minimise.Font = Enum.Font.SourceSans
-        Minimise.Text = "_"
+        Minimise.Text = "-"
         Minimise.TextColor3 = library.Settings.textColor
         Minimise.TextSize = 25
 		Minimise.MouseButton1Click:Connect(function()
