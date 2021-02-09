@@ -239,6 +239,13 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
 	Minimise.BorderSizePixel = 0
 	Minimise.MouseButton1Click:Connect(function()
 		    minimise()
+		    wait(0.1)
+if Minimise.Text == '-' then
+    Minimise.Text = "+"
+    
+    else
+        Minimise.Text = "-"
+        end
 		end)
 
         self.WindowCount = self.WindowCount + 1;
