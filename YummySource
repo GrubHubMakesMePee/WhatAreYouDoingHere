@@ -88,6 +88,8 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
     shared.ran = library.gui;
 
     local dragger = {};
+	
+	local draggerFrames = {};
 
     do
         local mouse        = game:GetService("Players").LocalPlayer:GetMouse();
@@ -112,8 +114,10 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
                     local objectPosition = Vector2.new(mouse.X - frame.AbsolutePosition.X, mouse.Y - frame.AbsolutePosition.Y);
                     while heartbeat:wait() and inputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
                         pcall(function()
-                            frame:TweenPosition(UDim2.new(0, mouse.X - objectPosition.X + (frame.Size.X.Offset * frame.AnchorPoint.X), 0, mouse.Y - objectPosition.Y + (frame.Size.Y.Offset * frame.AnchorPoint.Y)), 'Out', 'Linear', 0.01, true);
-                        end)
+						    local pos = UDim2.new(0, mouse.X - objectPosition.X + (frame.Size.X.Offset * frame.AnchorPoint.X), 0, mouse.Y - objectPosition.Y + (frame.Size.Y.Offset * frame.AnchorPoint.Y))
+                            frame:TweenPosition(pos, 'Out', 'Linear', 0.01, true);
+							draggerFrames[frame] = pos
+						end)
                     end
                 end
             end)
@@ -149,6 +153,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
         local minimised = false;
 
         local Window = Instance.new("Frame")
+        local WindowBG = Instance.new("TextLabel")
         local WindowName = Instance.new("TextLabel")
         local Minimise = Instance.new("TextButton")
 
@@ -160,20 +165,29 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
         Window.Position = UDim2.new(0, 150 + (190 * self.WindowCount), 0, (Window.Size.Y.Offset / 2) + 50)
         Window.Size = UDim2.new(0, 180, 0, 0)
         
-		
+        WindowBG.Name = "WindowBG"
+        WindowBG.Parent = Window
+        WindowBG.BackgroundColor3 = Color3.new(0.137255, 0.137255, 0.137255)
+        WindowBG.BorderColor3 = Color3.new(0.337255, 0.337255, 0.337255)
+        WindowBG.Position = UDim2.new(0, 0, 0, -35)
+        WindowBG.Size = UDim2.new(1, 0, 0, 35)
+		WindowBG.BorderSizePixel = 1
+		WindowBG.Text = ""
+        WindowBG.TextColor3 = library.Settings.textColor
+        WindowBG.TextSize = 25
 		
         WindowName.Name = "WindowName"
         WindowName.Parent = Window
         WindowName.BackgroundColor3 = Color3.new(0.137255, 0.137255, 0.137255)
         WindowName.BorderColor3 = Color3.new(0.337255, 0.337255, 0.337255)
         WindowName.Position = UDim2.new(0, 0, 0, -35)
-        WindowName.Size = UDim2.new(1, 0, 0, 35)
+        WindowName.Size = UDim2.new(1, -35, 0, 35)
         WindowName.Font = Enum.Font.SourceSans
         WindowName.Text = name
         WindowName.TextColor3 = library.Settings.textColor
         WindowName.TextSize = 25
+		WindowName.BorderSizePixel = 0
 
-        
 		
         dragger.new(Window, WindowName);
 
@@ -201,6 +215,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
         Container.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png";
         Container.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png";
         Container.CanvasSize = UDim2.new(0, 0, 0, 0);
+		Container.BorderSizePixel = 1
         
         UIListLayout.Parent = Container
         UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
@@ -217,9 +232,9 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
 
 		local function minimise()
             if minimised then
-                for _,v in pairs(Window:GetChildren()) do if v.Visible ~= nil and v.Name ~= "Minimise" and v.Name ~= "WindowName" then v.Visible = true end end
+                for _,v in pairs(Window:GetChildren()) do if v.Visible ~= nil and v.Name ~= "Minimise" and v.Name ~= "WindowName" and v.Name ~= "WindowBG" then v.Visible = true end end
             else
-                for _,v in pairs(Window:GetChildren()) do if v.Visible ~= nil and v.Name ~= "Minimise" and v.Name ~= "WindowName" then v.Visible = false end end                
+                for _,v in pairs(Window:GetChildren()) do if v.Visible ~= nil and v.Name ~= "Minimise" and v.Name ~= "WindowName" and v.Name ~= "WindowBG" then v.Visible = false end end                
             end
 			minimised = not minimised
 			window.minimised = minimised
@@ -233,11 +248,11 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
         Minimise.Position = UDim2.new(1, -35, 0, -35)
         Minimise.Size = UDim2.new(0, 35, 0, 35)
         Minimise.Font = Enum.Font.SourceSans
+		Minimise.BorderSizePixel = 0
         Minimise.Text = "-"
         Minimise.TextColor3 = library.Settings.textColor
         Minimise.TextSize = 25
-	Minimise.BorderSizePixel = 0
-	Minimise.MouseButton1Click:Connect(function()
+		Minimise.MouseButton1Click:Connect(function()
 		    minimise()
 		end)
 
@@ -316,12 +331,19 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
                 Window.Size = Size;
             end;
 
+			
+
             for i, v in pairs(library.gui:GetChildren()) do
                 if v == self.Container.Parent then
                     v.Position = UDim2.new(0, 150 + (self.Count * 190), 0, (v.Size.Y.Offset / 2) + 50);
                     break;
                 end;
             end;
+			
+			if draggerFrames[self.Container.Parent] then
+			    self.Container.Parent.Position = draggerFrames[self.Container.Parent];
+			end
+			
         end;
 
         function window:Button(name, callback)
@@ -413,6 +435,7 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
             local ToggleName = Instance.new("TextLabel")
             local Toggle = Instance.new("ImageButton")
             local Frame = Instance.new("Frame")
+			local toggleB = {}
             
             ToggleContainer.Name = "ToggleContainer"
             ToggleContainer.Parent = Container
@@ -476,8 +499,52 @@ local uiParent = game:GetService("RunService"):IsStudio() and game:GetService("P
                 callback(toggle);
             end);
             
+			function toggleB:Toggler()
+			    toggle = not toggle;
+
+                if toggle then
+                    Frame:TweenPosition(UDim2.new(0, 10, 0, -25), 'Out', 'Linear', .3, true)
+                else
+                    Frame:TweenPosition(UDim2.new(0, 0,0, 0), 'Out', 'Linear', .3, true)
+                end;
+
+                library.flags[name] = toggle;
+                callback(toggle);
+			end
+			
+			function toggleB:SetTo(to)
+			    assert(to ~= nil, "nil passed to SetTo")
+				toggle = to;
+
+                if toggle then
+                    Frame:TweenPosition(UDim2.new(0, 10, 0, -25), 'Out', 'Linear', .3, true)
+                else
+                    Frame:TweenPosition(UDim2.new(0, 0,0, 0), 'Out', 'Linear', .3, true)
+                end;
+
+                library.flags[name] = toggle;
+                callback(toggle);
+			end
+			
+			function toggleB:SetToNoCallback(to)
+			    assert(to ~= nil, "nil passed to SetToNoCallback")
+				toggle = to;
+
+                if toggle then
+                    Frame:TweenPosition(UDim2.new(0, 10, 0, -25), 'Out', 'Linear', .3, true)
+                else
+                    Frame:TweenPosition(UDim2.new(0, 0,0, 0), 'Out', 'Linear', .3, true)
+                end;
+
+                library.flags[name] = toggle;
+			end
+			
+			function toggleB:Get()
+			    return toggle;
+			end
+			
             self:Resize();
-            return Toggle;
+            return toggleB;
         end;
         
         function window:Section(name)
