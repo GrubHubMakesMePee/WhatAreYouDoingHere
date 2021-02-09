@@ -1,7 +1,7 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/YummySource",true))()
 
 local main = library:CreateWindow('Regular')
-local main2 = library:CreateWindow('Spawn & Despawn')
+local main2 = library:CreateWindow('Spawn')
 
 ------------------------------------------------------------------
 
