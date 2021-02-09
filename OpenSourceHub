@@ -162,6 +162,21 @@ KeyScreen:Destroy()
 
 else
 
+if Keytext == 'sakpot' then
+    
+loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua"))()
+
+game.StarterGui:SetCore("SendNotification", {
+Title = "GrubHub";
+Text = "Correct key. Thanks for being a viewer of Sakpot!";
+Icon = "rbxassetid://1299491401";
+Duration = 3;
+})
+wait(0.1)
+
+KeyScreen:Destroy()
+
+else
     
 if Keytext == 'masterflipz69' and game.Players.LocalPlayer.Name == 'dunkaroos1' or game.Players.LocalPlayer.Name == 'Boxking776' or game.Players.LocalPlayer.Name == 'kritasf' or game.Players.LocalPlayer.Name == 'smhxdd1' or game.Players.LocalPlayer.Name == 'G4N8' or game.Players.LocalPlayer.Name == 'rkmflipz' then
     
@@ -213,6 +228,7 @@ wait(2)
 
 game.Players.LocalPlayer:Kick("Wrong Key, Or an error occoured. Please contact Boxking776#0001.")
 
+end
 end
 end
 end
