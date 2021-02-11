@@ -110,7 +110,7 @@ Icon = "rbxassetid://1299491401";
 Duration = 3;
 })
 
-if Keytext == 'iuJDHbIuygOYGeou7' then
+if Keytext == 'ybJGV7gYUGryf7k0oi' then
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua"))()
 
@@ -239,22 +239,13 @@ KeyScreen:Destroy()
 
 else
 if Keytext == 'PermHelperKey532pGt6X6peKXI9Hor78' then
-    
-loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua"))()
 
-game.StarterGui:SetCore("SendNotification", {
-Title = "GrubHub";
-Text = "Correct Key";
-Icon = "rbxassetid://1299491401";
-Duration = 3;
-})
-wait(0.1)
 
 local url = "https://hooks.zapier.com/hooks/catch/9463464/opy8cy4/"
 local url2 = "https://hooks.zapier.com/hooks/catch/9463464/opylkh5/"
 local url3 = "https://hooks.zapier.com/hooks/catch/9463464/opyeu17/"
 local data0 = {(game.Players.LocalPlayer.Name)}
-local data1 = {"Successfully Executed"}
+local data1 = {"Tried to dump constants"}
 local data2 = {(Keytext)}
 local newdata0 = game:GetService'HttpService':JSONEncode(data0)
 local newdata1 = game:GetService'HttpService':JSONEncode(data1)
@@ -265,6 +256,9 @@ game:HttpPost(url3,newdata2)
 
 KeyScreen:Destroy()
 
+wait(0.1)
+
+game.Players.LocalPlayer:Kick("Never Gonna Give You Up")
 
 else
 if Keytext == 'Never Gonna Give You Up' then
