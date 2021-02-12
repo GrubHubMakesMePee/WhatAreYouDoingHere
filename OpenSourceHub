@@ -96,134 +96,40 @@ Submit.Text = "Submit Key"
 Submit.TextColor3 = Color3.fromRGB(0, 0, 0)
 Submit.TextSize = 23.000
 Submit.MouseButton1Down:connect(function()
-
-local Keytext = KeyBox.Text
-local lp = game.Players.LocalPlayer
-
-KeyScreen:Destroy()
-
-wait(0.5)
-
-game.StarterGui:SetCore("SendNotification", {
-Title = "GrubHub";
-Text = "Validating Key...";
-Icon = "rbxassetid://1299491401";
-Duration = 3;
-})
-
-if Keytext == 'ybJGV7gYUGryf7k0oi' then
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua"))()
-
-game.StarterGui:SetCore("SendNotification", {
-Title = "GrubHub";
-Text = "Correct Key";
-Icon = "rbxassetid://1299491401";
-Duration = 3;
-})
-
-wait(0.1)
-
-
-KeyScreen:Destroy()
-
-
-else
-if Keytext == 'PermHelperKey532pGt6X6peKXI9Hor78' then
-
-KeyScreen:Destroy()
-
-game.Players.LocalPlayer:Kick("Never Gonna Give You Up")
-
-else
-
-
-if Keytext == 'ntowashere' then
     
-loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua"))()
-
-game.StarterGui:SetCore("SendNotification", {
-Title = "GrubHub";
-Text = "Correct key. Thanks for being a viewer of NTO Exploits!";
-Icon = "rbxassetid://1299491401";
-Duration = 3;
-})
-wait(0.1)
-
-KeyScreen:Destroy()
-
-else
-
-if Keytext == 'sakpot' then
+local KeyText = KeyBox.Text
     
-loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua"))()
+local RegKeys = {
+["ybJGV7gYUGryf7k0oi"] = "testingyourpatience.lua",
+["ntowashere"] = "testingyourpatience.lua",
+["sakpot"] = "testingyourpatience.lua"
+}
 
-game.StarterGui:SetCore("SendNotification", {
-Title = "GrubHub";
-Text = "Correct key. Thanks for being a viewer of Sakpot!";
-Icon = "rbxassetid://1299491401";
-Duration = 3;
-})
-wait(0.1)
 
+
+local gameScript = RegKeys[KeyText]
+
+
+if gameScript ~= nil then
+    KeyScreen:Destroy()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/" .. gameScript,true))()
+else 
+
+
+if game.Players.LocalPlayer.Name == 'dunkaroos1' or game.Players.LocalPlayer.Name == 'Boxking776' or game.Players.LocalPlayer.Name == 'kritasf' or game.Players.LocalPlayer.Name == 'smhxdd1' or game.Players.LocalPlayer.Name == 'G4N8' or game.Players.LocalPlayer.Name == 'rkmflipz' then
+local PremiumKeys = {
+["masterflipz69"] = "testingyourpatience.lua"
+}
+
+local gameScriptPremium = PremiumKeys[KeyText]
+
+
+
+if gameScriptPremium ~= nil then
 KeyScreen:Destroy()
-
-else
-    
-if Keytext == 'masterflipz69' and game.Players.LocalPlayer.Name == 'dunkaroos1' or game.Players.LocalPlayer.Name == 'Boxking776' or game.Players.LocalPlayer.Name == 'kritasf' or game.Players.LocalPlayer.Name == 'smhxdd1' or game.Players.LocalPlayer.Name == 'G4N8' or game.Players.LocalPlayer.Name == 'rkmflipz' then
-    
-loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua"))()
-
-game.StarterGui:SetCore("SendNotification", {
-Title = "GrubHub";
-Text = "Correct Key";
-Icon = "rbxassetid://1299491401";
-Duration = 3;
-})
-wait(0.1)
-
-KeyScreen:Destroy()
-
-else
-    
-if Keytext == 'Never Gonna Give You Up' then
-
-wait(0.1)
-
-KeyScreen:Destroy()
-
-game.Players.LocalPlayer:Kick("Never Gonna Let You Down")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/" .. gameScriptPremium,true))()
 
 
-else
-if Keytext == 'GrubHub Perks give you deals on the Scripts you love' then
-
-wait(0.1)
-
-game.StarterGui:SetCore("SendNotification", {
-Title = "GrubHub";
-Text = "The kind that make you Boogie";
-Icon = "rbxassetid://1299491401";
-Duration = 3;
-})
-
-
-else
-
-game.StarterGui:SetCore("SendNotification", {
-Title = "GrubHub";
-Text = "Wrong Key";
-Icon = "rbxassetid://1299491401";
-Duration = 3;
-})
-wait(2)
-
-game.Players.LocalPlayer:Kick("Wrong Key. Please check the discord server for the updated one.")
-
-end
-end
-end
-end
 end
 end
 end
