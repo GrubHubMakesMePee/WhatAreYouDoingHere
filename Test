@@ -111,7 +111,7 @@ UserInputService.InputBegan:Connect(
 	end
 )
 
-function library:Window(text, textgame, circletext)
+function library:CreateWindow(text, textgame, circletext)
 	local FirstTab = false
 	local MainFrame = Instance.new("Frame")
 	local MainCorner = Instance.new("UICorner")
