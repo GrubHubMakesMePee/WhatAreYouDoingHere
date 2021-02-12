@@ -266,31 +266,31 @@ end)
 local CarTp = Misc:Button('TP to Car', function()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService("Workspace").CarContainer.Sedan.Body.Seat.Position)
     end)
-local GMods = Misc:Button('Mod Guns', function()
-        wait(0.1)
-game.StarterGui:SetCore("SendNotification", {
-Title = "GrubHub";
-Text = "Gun Modding proceeding, un-equip items first.";
-Icon = "rbxassetid://1299491401";
-Duration = 3;
-})
-               wait(1)
-               while true do wait()
-local b = math.huge
-for i,c in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren())  do
-  local found = c:FindFirstChild("GunStates")
-   if found then 
-       local bluefacebaby = require(found)
-			bluefacebaby.Bullets = 10
-			bluefacebaby.Spread = 0
-			bluefacebaby.CurrentAmmo = 999
-			bluefacebaby.StoredAmmo = 9999
-			bluefacebaby.AutoFire = true
-			bluefacebaby.Range = 10000
-			bluefacebaby.FireRate = 0.001
-			bluefacebaby.MaxAmmo = 999
-			bluefacebaby.Damage = 100
-end
-end
-end
-end)
+--local GMods = Misc:Button('Mod Guns', function()
+        --wait(0.1)
+--game.StarterGui:SetCore("SendNotification", {
+--Title = "GrubHub";
+--Text = "Gun Modding proceeding, un-equip items first.";
+--Icon = "rbxassetid://1299491401";
+--Duration = 3;
+--})
+--               wait(1)
+--               while true do wait()
+--local b = math.huge
+--for i,c in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren())  do
+--  local found = c:FindFirstChild("GunStates")
+--   if found then 
+--       local bluefacebaby = require(found)
+--			bluefacebaby.Bullets = 10
+--			bluefacebaby.Spread = 0
+--			bluefacebaby.CurrentAmmo = 999
+--			bluefacebaby.StoredAmmo = 9999
+--			bluefacebaby.AutoFire = true
+--			bluefacebaby.Range = 10000
+--			bluefacebaby.FireRate = 0.001
+--			bluefacebaby.MaxAmmo = 999
+--			bluefacebaby.Damage = 100
+--end
+--end
+--end
+--end)
