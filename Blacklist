@@ -1,0 +1,6 @@
+-- ["PlayerName"] = {["Text"] = ""}
+-- e.g. ["ROBLOX"] = {["Text"] = "Roblox Themself"}
+
+return {
+    ["ROBLOX"] = {["Text"] = "Placeholder Text"}
+}
