@@ -116,11 +116,12 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineerin
 else 
 
 
-if game.Players.LocalPlayer.Name == 'dunkaroos1' or game.Players.LocalPlayer.Name == 'Boxking776' or game.Players.LocalPlayer.Name == 'kritasf' or game.Players.LocalPlayer.Name == 'smhxdd1' or game.Players.LocalPlayer.Name == 'G4N8' or game.Players.LocalPlayer.Name == 'rkmflipz' or game.Players.LocalPlayer.Name == 'GlossyAzAaaaa09' or game.Players.LocalPlayer.Name == 'poopingmaster42_O'then
+if game.Players.LocalPlayer.Name == 'dunkaroos1' or game.Players.LocalPlayer.Name == 'Boxking776' or game.Players.LocalPlayer.Name == 'kritasf' or game.Players.LocalPlayer.Name == 'smhxdd1' or game.Players.LocalPlayer.Name == 'G4N8' or game.Players.LocalPlayer.Name == 'rkmflipz' or game.Players.LocalPlayer.Name == 'GlossyAzAaaaa09' or game.Players.LocalPlayer.Name == 'poopingmaster42_O' or game.Players.LocalPlayer.Name == 'TrapsOverGirls' then
 local PremiumKeys = {
 ["masterflipz69"] = "testingyourpatience.lua",
 ["ILikeOrangeJuice"] = "testingyourpatience.lua",
-["key"] = "testingyourpatience.lua"
+["key"] = "testingyourpatience.lua",
+["TacoYaki7639jf33j"] = "testingyourpatience.lua"
 }
 
 local gameScriptPremium = PremiumKeys[KeyText]
