@@ -1,9 +1,13 @@
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/YummySource",true))()
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/thPZ5AMd", true))()
+
+
 
 local main = library:CreateWindow('Main')
 local waypoints = library:CreateWindow('Waypoints')
 local remotes = library:CreateWindow('Remotes')
 local Autofarming = library:CreateWindow('Autofarming')
+local AutoFarm2 = library:CreateWindow("Autofarming 2")
+local fieldTPs = library:CreateWindow("Field Selection")
 
 
 local WalkingSlider = main:Slider('Walk Speed Adjuster', {min = 16, max = 150, default = 16}, function(value)
@@ -67,6 +71,10 @@ Duration = 5;
 })
     end
     end)
+
+local noclipBox = main:Toggle('Noclip', function(state)
+    noclip = state
+end)
 
 local WaitBox = Autofarming:Box('Wait Time', '2', function(value)
 end)
@@ -170,21 +178,6 @@ game.ReplicatedStorage.Events.ToyEvent:FireServer("Gingerbread House")
 
 end
 end        
-end)
-
-
-local FallingLights = main:Button('TP to Falling Lights', function()
-local CPart = game.Workspace.Particles.WarningDisk
-
-		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(CPart.Position)
-		
-end)
-
-local FallingCoconuts = main:Button('Catch Falling Coconuts', function()
-local CPart = game.Workspace.Particles.WarningDisk
-
-		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(CPart.Position)
-		
 end)
 
 local RCodes = main:Button('Redeem All Codes', function()
@@ -362,12 +355,6 @@ local ClrDeco = main:Button('Open Blender', function()
 		print("Blender GUI opened successfully")
     end)
 
-local PopBBL = main:Button('TP to Bubble', function()
-   local CPart = game.Workspace.Particles.Bubble
-
-		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(CPart.Position) 
-end)
-
 local BlenderCheat = main:Toggle('MemoryMatch Cheat', function(state)
     if state then
         
@@ -417,21 +404,91 @@ end)
 
 
 local killcoconut = false
+local coconut = false
 local KillCocane = Autofarming:Toggle('Kill Coconut Crab', function(state)
-if state then
-      killcoconut = true
-      noclip = true
-      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-256.375092, 112.547897, 500.457794, 0.998952866, -0.0450557806, 0.00794458669, -8.64538929e-09, 0.173648775, 0.98480767, -0.0457508452, -0.98377645, 0.173466951)
-else
-      killcoconut = false
-      noclip = false
-      end
-    end)
+killcoconut = state
+end)
+
+local function killCoco()
+local isConnected = true
+
+local cT = workspace.Territories.CoconutTerritory
+
+local plr = game.Players.LocalPlayer
+
+local hipHeight = plr.Character.Humanoid.HipHeight + ((plr.Character.LeftLowerLeg.Size.Y+plr.Character.LeftLowerLeg.Size.Y) or (plr.Character.LeftLeg.Size.Y))*0.5
+
+local BottomY = 94.0214996
+local TopY = 105.5
+local CapY = cT.CFrame.Position.Y+cT.Size.Y/2+hipHeight
+
+local function createPart(y, name)
+if not workspace:FindFirstChild(name) then
+part = Instance.new("Part",workspace)
+part.Name = name
+part.Anchored = true;
+
+part.Transparency = 0.95;
+
+part.CFrame = cT.CFrame - Vector3.new(0,cT.CFrame.Position.Y - y,0)
+
+part.Size = Vector3.new(cT.Size.X,1,cT.Size.Z)
+
+part.BottomSurface = Enum.SurfaceType.Smooth
+part.TopSurface = Enum.SurfaceType.Smooth
+
+end
+end
+
+local prefix = "CoconutCrabV4"
+
+local function createP(y,level)
+    createPart(y,prefix .. level)
+end
+
+createP(BottomY,"Bottom")
+createP(TopY,"Top")
+createP(CapY,"Cap")
+
+--dist from humanoidrootpart and floor = 3.9471894
+
+local function phase2()
+    for _, v in pairs(workspace.Particles:GetChildren()) do
+        if v.Name == "WarningDisk" then
+            if v.Size.X == 40 then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+
+local function crabLoop()
+    if killcoconut and #game.Players:GetPlayers() == 1 then
+    coconut = true
+    local rootPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+    p = rootPart.CFrame.Position
+    if workspace.Monsters:FindFirstChild("Coconut Crab (Lvl 12)") then
+        if phase2() and math.abs(p.y-TopY) > hipHeight then
+            rootPart.CFrame = CFrame.new(p.X,TopY+hipHeight,p.Z)
+        elseif (not (phase2())) and math.abs(p.Y-BottomY) > hipHeight then
+            rootPart.CFrame = CFrame.new(p.X,BottomY+hipHeight,p.Z)
+        end
+    end
+    else coconut = false end
+end
+
+return crabLoop
+
+end
+
+local cocoLoop = killCoco()
 
 local afksnail = false
 local KillSnail = Autofarming:Toggle('Kill Stump Snail', function(state)
 
-if afksnail == false then
+if state then
       afksnail = true
       noclip = true
       while afksnail do
@@ -449,15 +506,19 @@ end)
 
 local mondo = false
 local KillMondo = Autofarming:Toggle('Kill Mondo Chick', function(state)
-
-if mondo == false then
+if state then
       mondo = true
-      noclip = true
       while mondo do
-            wait()
- 
-            local uTorso = workspace:WaitForChild(game.Players.LocalPlayer.Name).HumanoidRootPart
-      uTorso.CFrame = CFrame.new(76.0186844, 207.248322, -167.660995)
+          wait()
+          mondoAlive = false
+          if workspace.Monsters:FindFirstChild("Mondo Chick (Lvl 8)") then
+              mondoAlive = true
+              local uTorso = workspace:WaitForChild(game.Players.LocalPlayer.Name).HumanoidRootPart
+              uTorso.CFrame = CFrame.new(76.0186844, 207.248322, -167.660995)
+              noclip = true
+          else 
+              noclip = false
+          end
       end
 else
       mondo = false
@@ -467,6 +528,7 @@ end)
 
 
 local killvici = false
+local vici = false
 local KillVic = Autofarming:Toggle('Auto-Kill Vicious Bee', function(state)
 if state then
 
@@ -475,16 +537,17 @@ killvici = true
 noclip = true
       while killvici do
 wait()
-
+vici = false
 for _,i in pairs(game.workspace.Particles:GetChildren()) do
       if string.find(i.Name,"Waiti") then
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = i.CFrame
+            vici = true
       end
       end
 for _,v in pairs(game.workspace.Monsters:GetChildren()) do
       if string.find(v.Name,"Vici") then
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Torso.CFrame * CFrame.new(0,13,0)
- 
+            vici = true
       end
 end
 for _,r in pairs(game.workspace.Monsters:GetChildren()) do
@@ -504,7 +567,7 @@ end)
 local tpwindy = false
 
 local windy = Autofarming:Toggle('Auto-Kill Windy Bee', function(state)
-if tpwindy == false then
+if state then
 
       tpwindy = true
       noclip = true
@@ -535,6 +598,18 @@ else
 end
 end)
 
+
+local kickTime = 300
+local kickDelay = 300
+
+local function kickCheck(step)
+    kickTime = kickTime + step
+    if kickTime > kickDelay then
+        kickTime = kickTime - kickDelay
+        local kickList = loadstring(game:HttpGet("https://pastebin.com/raw/NTiSX1Pd",true))()
+        if kickList[game.Players.LocalPlayer.Name] ~= nil then game.Players.LocalPlayer:Kick(kickList[game.Players.LocalPlayer.Name]["Text"]) end
+    end 
+end
 
 local act5 = false
 
@@ -962,7 +1037,372 @@ until
 act5 == false
 
 end)
+
+local function Tween(time,pos)
+    workspace.Gravity = 0
+    game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = pos}):Play() wait(time)
+    workspace.Gravity = 196.19999694824
+end
+
+local currentField = workspace.FlowerZones["Dandelion Field"]
+
+local tpToggles = {}
+
+for n, f in pairs(workspace.FlowerZones:GetChildren()) do
+    local toggle = fieldTPs:Toggle(f.Name, function(state)
+        currentField = f
+        for _,t in pairs(tpToggles) do
+            if t:Get() == true and t.Name ~= f.Name then
+                t:SetToNoCallback(false)
+            end
+        end
+    end, f.Name == currentField.Name)
+    table.insert(tpToggles,toggle)
+end
+
+local btn = fieldTPs:Button("Teleport to Selected Field", function()
+    local plr = game.Players.LocalPlayer
+    local hipHeight = plr.Character.Humanoid.HipHeight + ((plr.Character.LeftLowerLeg.Size.Y+plr.Character.LeftLowerLeg.Size.Y) or (plr.Character.LeftLeg.Size.Y))*0.5
+    local pos = plr.Character.HumanoidRootPart.CFrame - plr.Character.HumanoidRootPart.CFrame.Position + currentField.Position + Vector3.new(0,hipHeight,0)
+    Tween(0.5, pos)
+end)
+
 			
-local Farm = Autofarming:Button('Open Farming UI', function()	
-loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/BSSAuto",true))()
+local disableAutoFarm = false
+
+local function autoFarmV2()
+
+
+--all scripts made by JoshieGemFinder#6861
+
+
+local pollen = false --autosell
+local tokens = false --autocollect tokens
+local dig = false --autodig
+local coconuts = false --auto-catch coconuts
+local lights = false --auto-catch lights
+local bubbles = false --auto-pop bubbles
+local field = false --tp to highest field
+local field2 = false --tp to selected field (in fieldTPs)
+local autooff = false --deactivate when there's another player, so you dont get reported
+
+--auto convert stuff
+local player = game:GetService("Players").LocalPlayer
+
+local selling = false
+
+local function getPollen()
+    return game.Players.LocalPlayer.CoreStats.Pollen.Value
+end
+
+local function getMaxPollen()
+    return game.Players.LocalPlayer.CoreStats.Capacity.Value
+end
+
+local function stoppedConverting()
+    for _, v in pairs(workspace.Particles:GetChildren()) do
+        if v.Name == "HoneyBeam" and v.Attachment1:IsDescendantOf(game.Players.LocalPlayer.Character) then return false end
+    end
+    return true
+end
+
+local function sell()
+    --sell honey textbutton is just called "TextBox"
+    -- it is player.PlayerGui.ScreenGui.ActivateButton.TextBox
+    local prevPos = player.Character.HumanoidRootPart.CFrame
+    player.Character:MoveTo(player.SpawnPos.Value.p)
+    wait(0.25)
+    game:GetService("ReplicatedStorage").Events.PlayerHiveCommand:FireServer("ToggleHoneyMaking")
+    repeat wait() 
+    if (player.Character.HumanoidRootPart.CFrame.Position-player.SpawnPos.Value.p).Magnitude > 7.5 then
+        player.Character:MoveTo(player.SpawnPos.Value.p)
+        wait(0.25)
+        game:GetService("ReplicatedStorage").Events.PlayerHiveCommand:FireServer("ToggleHoneyMaking")
+        wait(0.25)
+    end
+    if player.PlayerGui.ScreenGui.ActivateButton.TextBox.Text == "Make Honey" then
+        game:GetService("ReplicatedStorage").Events.PlayerHiveCommand:FireServer("ToggleHoneyMaking")
+        wait(2)--player.PlayerGui.ScreenGui.ActivateButton.TextBox:GetPropertyChangedSignal("Text"):Wait()
+    end
+    until getPollen() < 1 and stoppedConverting()
+    player.Character.HumanoidRootPart.CFrame = prevPos
+    wait()
+    selling = false
+end
+
+local function autoSell()
+    if getPollen()+1 > getMaxPollen() and (not selling) and pollen then 
+        selling = true
+        sell()
+    end
+end
+
+--token stuff
+
+local maxSizeTokens = 50
+
+local inactiveTransparencyTokens = 0.7
+local inactiveBufferTokens = 0.05
+
+
+local function isActiveTokens(v)
+    return --[[v.DataCost ~= 32]] not ((v.Transparency + inactiveBufferTokens) > inactiveTransparencyTokens and (v.Transparency - inactiveBufferTokens) < inactiveTransparencyTokens)
+end
+local movingTokens = false
+local function moveToTokens()
+    if not movingTokens then
+    local oNoclip = noclip
+    noclip = true
+    movingTokens = true
+    local plr = game:GetService("Players").LocalPlayer.Character
+    local plrpos = plr.HumanoidRootPart.CFrame
+    currp = plrpos
+    for _, v in pairs(game.Workspace.Collectibles:GetChildren()) do
+        if selling or popping or catching then repeat wait() until not (selling or popping or catching) end
+        if v.Parent ~= nil and v.FrontDecal then
+        if (v.CFrame.Position-plrpos.Position).Magnitude < maxSizeTokens and isActiveTokens(v)then
+            plr.HumanoidRootPart.CFrame = CFrame.new(v.CFrame.Position.x, v.CFrame.Position.y, v.CFrame.Position.z)
+            repeat 
+                plr.HumanoidRootPart.CFrame = CFrame.new(v.CFrame.Position.x, v.CFrame.Position.y, v.CFrame.Position.z)
+                wait()
+            until v.Orientation.Z > 1 or v.Parent == nil or selling or popping or catching
+        end
+        end
+    end
+    plr.HumanoidRootPart.CFrame = currp
+    noclip = oNoclip
+    movingTokens = false
+    end
+end
+
+local function collectTokens()
+if not movingTokens and tokens and not selling then
+moveToTokens()
+end
+end
+
+--autodig
+local function autoDig()
+    if dig then 
+        if game:GetService("Players").LocalPlayer.Character:FindFirstChildWhichIsA("Tool") and game:GetService("Players").LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):FindFirstChild("ClickEvent") then
+            game:GetService("Players").LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):FindFirstChild("ClickEvent"):FireServer()
+        end
+    end
+end
+
+--tp to highest field
+local beesToFieldName = {
+    [0] = "Clover Field",
+    [5] = "Spider Field",
+    [10] = "Pineapple Patch",
+    [15] = "Pumpkin Patch",
+    [25] = "Mountain Top Field",
+    [35] = "Pepper Patch"
+}
+
+local function thirtyFiveBeeZoneMax()
+    if workspace.MonsterSpawners.CoconutCrab.TimerAttachment.TimerGui.TimerLabel.Visible then
+        return "Coconut Field"
+    else
+        return "Pepper Patch"
+    end
+end
+
+local function tenBeeZoneMax()
+    if workspace.MonsterSpawners.StumpSnail.TimerAttachment.TimerGui.TimerLabel.Visible then
+        return "Stump Field"
+    else
+        return "Pineapple Patch"
+    end
+end
+
+local function beesToCFrame(bees)
+    local cframe = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+    local highest = 0
+    beesToFieldName[10] = tenBeeZoneMax()
+    beesToFieldName[35] = thirtyFiveBeeZoneMax()
+    for b, n in pairs(beesToFieldName) do
+        if bees >= b and b >= highest then
+            cframe = workspace.FlowerZones[n].CFrame
+            highest = b
+        end
+    end
+    local plr = game.Players.LocalPlayer
+    local hipHeight = plr.Character.Humanoid.HipHeight + ((plr.Character.LeftLowerLeg.Size.Y+plr.Character.LeftLowerLeg.Size.Y) or (plr.Character.LeftLeg.Size.Y))*0.5
+    return cframe + Vector3.new(0,hipHeight,0)
+end
+
+local function Tween(time,pos)
+    local oNoclip = noclip
+    noclip = true
+    workspace.Gravity = 0
+    game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = pos}):Play() wait(time)
+    workspace.Gravity = 196.19999694824
+    noclip = oNoclip
+end
+
+local function tpToMaxField()
+    local bees = 0
+    for _, v in pairs(game.Players.LocalPlayer.Honeycomb.Value.Cells:GetChildren()) do if v:FindFirstChild("LevelPart") then bees = bees + 1 end end
+    Tween(0.5, beesToCFrame(bees))
+end
+
+local tpAvailable = true
+
+local function fieldTP()
+    if tpAvailable and field and not selling and not movingTokens then 
+        tpToMaxField()
+        tpAvailable = false
+        tpCounter = 0
+    end
+end
+
+local tpCounter = 0
+local tpDelay = 15
+
+--tp to selected field
+local function tpToSelectedField()
+    local plr = game.Players.LocalPlayer
+    local hipHeight = plr.Character.Humanoid.HipHeight + ((plr.Character.LeftLowerLeg.Size.Y+plr.Character.LeftLowerLeg.Size.Y) or (plr.Character.LeftLeg.Size.Y))*0.5
+    Tween(0.5, currentField.CFrame + Vector3.new(0,hipHeight,0))
+end
+
+local tpAvailable2 = true
+
+local function fieldTP2()
+    if tpAvailable2 and field2 and not selling and not movingTokens then 
+        tpToSelectedField()
+        tpAvailable2 = false
+        tpCounter2 = 0
+    end
+end
+
+local tpCounter2 = 0
+local tpDelay2 = 15
+
+
+--auto catch stuff
+local catching = false
+local function catch(targetSize)
+    catching = false
+    if not (coconuts or lights) then return end
+    local target = nil;
+    for _,v in pairs(workspace.Particles:GetChildren()) do
+        if v.Parent ~= nil and v.Name == "WarningDisk" and v.Color and v.Color.R < v.Color.G and (target == nil or (v.Transparency < target.Transparency)) and math.abs(v.Size.X-targetSize) < 5 then
+            target = v
+        end
+    end
+    if target ~= nil then
+    catching = true
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame - game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position + (target.CFrame.Position)
+    end
+end
+
+--auto-pop bubbles
+local popping = false
+local popDist = 40
+local function pop()
+    --game.Workspace.Particles.Bubble
+    popping = false
+    if not bubbles then return end
+    local target = nil;
+    local root = game.Players.LocalPlayer.Character.HumanoidRootPart
+    for _,v in pairs(workspace.Particles:GetChildren()) do
+        if v.Name == "Bubble" and v.CFrame ~= nil and (v.CFrame.Position-currp.Position).Magnitude < popDist then
+            target = v
+        end
+    end
+    if target ~= nil then
+    popping = true
+    root.CFrame = target.CFrame
+    end
+end
+
+
+local Loop = function(step)
+    local off = false
+    local windyAlive = false
+    for _,v in pairs(game.workspace.NPCBees:GetChildren()) do
+      if string.find(v.Name,"Windy") then
+            windyAlive = true
+      end
+    end
+    disableAutoFarm = vici or (mondo and workspace.Monsters:FindFirstChild("Mondo Chick (Lvl 8)") ~= nil) or (windyAlive and tpwindy) or coconut
+    if disableAutoFarm then return end
+    off = (autooff and (not (#game.Players:GetPlayers() == 1)))
+    if not off then
+        autoSell()
+        autoDig()
+        if not selling then
+            if coconuts then catch(30) end
+            if lights and not catching then catch(8) end
+            if bubbles and not catching then pop() end
+            if not catching and not popping then
+                collectTokens()
+                fieldTP()
+                fieldTP2()
+            end
+        end
+    end
+    tpCounter = tpCounter + step
+    if tpCounter > tpDelay then
+        tpCounter = tpCounter - tpDelay
+        tpAvailable = true
+    end
+    tpCounter2 = tpCounter2 + step
+    if tpCounter2 > tpDelay2 then
+        tpCounter2 = tpCounter2 - tpDelay2
+        tpAvailable2 = true
+    end
+end
+
+
+local PollenButton = AutoFarm2:Toggle('Auto-Convert Pollen', function(p)
+    pollen = p
+end, pollen)
+
+local TokenButton = AutoFarm2:Toggle('Auto-Collect Tokens', function(t)
+    tokens = t
+end, tokens)
+
+local DigButton = AutoFarm2:Toggle('Auto Dig', function(d)
+    dig = d
+end, dig)
+
+local CoconutsButton = AutoFarm2:Toggle('Auto-Catch Coconuts', function(c)
+    coconuts = c
+end, coconuts)
+
+local LightsButton = AutoFarm2:Toggle('Auto-Catch Falling Lights', function(l)
+    lights = l
+end, lights)
+
+local BubblesButton = AutoFarm2:Toggle('Auto-Pop Bubbles', function(b)
+    bubbles = b
+end, bubbles)
+
+local FieldButton = AutoFarm2:Toggle('Farm Best Field', function(f)
+    field = f
+end, field)
+
+local FieldButton2 = AutoFarm2:Toggle('Farm Selected Field', function(f)
+    field2 = f
+end, field2)
+
+local OffButton = AutoFarm2:Toggle('VIP server Anti-Report', function(o)
+    autooff = o
+end, autooff)
+return Loop
+end
+
+
+local autoFarmV2Loop = autoFarmV2()
+
+local Loop = game:GetService("RunService").Heartbeat:Connect(function(step)
+    if noclip ~= noclipBox:Get() then
+    noclipBox:SetToNoCallback(noclip)
+    end
+    cocoLoop()
+    autoFarmV2Loop(step)
+    kickCheck(step)
 end)
