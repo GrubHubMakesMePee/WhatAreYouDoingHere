@@ -171,14 +171,23 @@ function VLib:Window(text, textgame, circletext)
 	CircleCorner.Name = "CircleCorner"
 	CircleCorner.Parent = Circle
 
-	local Players = game:GetService("Players")
-	local player = Players.LocalPlayer
 	CircleName.Name = "CircleName"
     CircleName.Parent = Circle
     CircleName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     CircleName.BackgroundTransparency = 1.000
     CircleName.Size = UDim2.new(0, 38, 0, 37)
-    CircleName.Image = Players:GetUserThumbnailAsync()
+    local Players = game:GetService("Players")
+
+    local player = Players.LocalPlayer
+
+    local userId = player.UserId
+    local thumbType = Enum.ThumbnailType.HeadShot
+    local thumbSize = Enum.ThumbnailSize.Size420x420
+    local content, isReady = Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
+
+    local imageLabel = CircleName
+    imageLabel.Image = content
+    
 
 	GameTitle.Name = "GameTitle"
 	GameTitle.Parent = LeftFrame
