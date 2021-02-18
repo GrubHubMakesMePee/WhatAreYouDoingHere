@@ -1,3 +1,14 @@
+for _,v in pairs(game.CoreGui:GetDescendants()) do
+
+if string.find(v.Name,"KeyScreen") then
+v:Destroy()
+
+end
+end
+
+wait(0.1)
+
+
 local KeyScreen = Instance.new("ScreenGui")
 local KeyFrame = Instance.new("ImageLabel")
 local TOPFRAME = Instance.new("Frame")
