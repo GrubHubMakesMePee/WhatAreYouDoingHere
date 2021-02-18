@@ -1046,7 +1046,7 @@ function VLib:Window(text, textgame, circletext)
 			RainbowTitle.Position = UDim2.new(0.0204080511, 0, 0, 0)
 			RainbowTitle.Size = UDim2.new(0, 29, 0, 27)
 			RainbowTitle.Font = Enum.Font.Gotham
-			RainbowTitle.Text = "Toggle"
+			RainbowTitle.Text = "Toggle Rainbow" ---------------------------------------------------------------------
 			RainbowTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			RainbowTitle.TextSize = 14.000
 			RainbowTitle.TextXAlignment = Enum.TextXAlignment.Left
