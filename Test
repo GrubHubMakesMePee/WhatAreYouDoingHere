@@ -505,6 +505,7 @@ function VLib:Window(text, textgame, circletext)
 				end
 			)()
 		end
+-----------------------------------------------------------------------------------------------------------------------------------------
 		function ContainerItems:Slider(text, min, max, start, callback)
                         local dragging = false
 			local Slider = Instance.new("TextButton")
@@ -577,7 +578,7 @@ function VLib:Window(text, textgame, circletext)
 			local function slide(input)
 				local pos =
 					UDim2.new(
-						math.clamp((input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1),
+						math.clamp((input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 0.1),-----------------------------------here
 						0,
 						0,
 						11
@@ -618,11 +619,12 @@ function VLib:Window(text, textgame, circletext)
 			coroutine.wrap(
 				function()
 					while wait() do
-						SliderIndicator.BackgroundColor3 = Color3.fromHSV(zigzag(counter), .8, 1)
+						SliderIndicator.BackgroundColor3 = Color3.fromHSV(zigzag(counter), .8, 0.1)-----------------------------------here
 					end
 				end
 			)()
 		end
+------------------------------------------------------------------------------------------------------------------------------------
 		function ContainerItems:Dropdown(text, list, callback)
 			local DropToggled = false
 			local FrameSize = 0
