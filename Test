@@ -505,7 +505,6 @@ function VLib:Window(text, textgame, circletext)
 				end
 			)()
 		end
------------------------------------------------------------------------------------------------------------------------------------------
 		function ContainerItems:Slider(text, min, max, start, callback)
                         local dragging = false
 			local Slider = Instance.new("TextButton")
@@ -624,7 +623,6 @@ function VLib:Window(text, textgame, circletext)
 				end
 			)()
 		end
-------------------------------------------------------------------------------------------------------------------------------------
 		function ContainerItems:Dropdown(text, list, callback)
 			local DropToggled = false
 			local FrameSize = 0
