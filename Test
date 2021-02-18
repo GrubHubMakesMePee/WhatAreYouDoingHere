@@ -578,7 +578,7 @@ function VLib:Window(text, textgame, circletext)
 			local function slide(input)
 				local pos =
 					UDim2.new(
-						math.clamp((input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 0.1),-----------------------------------here
+						math.clamp((input.Position.X - SliderFrame.AbsolutePosition.X) / SliderFrame.AbsoluteSize.X, 0, 1),
 						0,
 						0,
 						11
@@ -619,7 +619,7 @@ function VLib:Window(text, textgame, circletext)
 			coroutine.wrap(
 				function()
 					while wait() do
-						SliderIndicator.BackgroundColor3 = Color3.fromHSV(zigzag(counter), .8, 0.1)-----------------------------------here
+						SliderIndicator.BackgroundColor3 = Color3.fromHSV(zigzag(counter), .8, 1)
 					end
 				end
 			)()
