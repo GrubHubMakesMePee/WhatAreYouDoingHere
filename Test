@@ -1,4 +1,4 @@
-local library = {RainbowColorValue = 0, HueSelectionPosition = 0}
+local VLib = {RainbowColorValue = 0, HueSelectionPosition = 0}
 function zigzag(X)
 	return math.acos(math.cos(X * math.pi)) / math.pi
 end
@@ -20,15 +20,15 @@ coroutine.wrap(
 coroutine.wrap(
 	function()
 		while wait() do
-			library.RainbowColorValue = library.RainbowColorValue + 1 / 255
-			library.HueSelectionPosition = library.HueSelectionPosition + 1
+			VLib.RainbowColorValue = VLib.RainbowColorValue + 1 / 255
+			VLib.HueSelectionPosition = VLib.HueSelectionPosition + 1
 
-			if library.RainbowColorValue >= 1 then
-				library.RainbowColorValue = 0
+			if VLib.RainbowColorValue >= 1 then
+				VLib.RainbowColorValue = 0
 			end
 
-			if library.HueSelectionPosition == 80 then
-				library.HueSelectionPosition = 0
+			if VLib.HueSelectionPosition == 80 then
+				VLib.HueSelectionPosition = 0
 			end
 		end
 	end
@@ -91,10 +91,10 @@ local function MakeDraggable(topbarobject, object)
 	)
 end
 
-local library = Instance.new("ScreenGui")
-library.Name = "library"
-library.Parent = game.CoreGui
-library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local Library = Instance.new("ScreenGui")
+Library.Name = "Library"
+Library.Parent = game.CoreGui
+Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local uitoggled = false
 UserInputService.InputBegan:Connect(
@@ -111,7 +111,7 @@ UserInputService.InputBegan:Connect(
 	end
 )
 
-function library:CreateWindow(text, textgame, circletext)
+function VLib:Window(text, textgame, circletext)
 	local FirstTab = false
 	local MainFrame = Instance.new("Frame")
 	local MainCorner = Instance.new("UICorner")
@@ -236,7 +236,7 @@ function library:CreateWindow(text, textgame, circletext)
 		end
 	)()
 	local Tabs = {}
-	function Tabs:CreateWindow(text)
+	function Tabs:Tab(text)
 		local Tab = Instance.new("TextButton")
 		local TabCorner = Instance.new("UICorner")
 		local Title = Instance.new("TextLabel")
@@ -505,7 +505,7 @@ function library:CreateWindow(text, textgame, circletext)
 				end
 			)()
 		end
-		function ContainerItems:Slider(text, min, max, default, callback)
+		function ContainerItems:Slider(text, min, max, start, callback)
                         local dragging = false
 			local Slider = Instance.new("TextButton")
 			local Title = Instance.new("TextLabel")
@@ -553,7 +553,7 @@ function library:CreateWindow(text, textgame, circletext)
 			SliderIndicator.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 			SliderIndicator.BorderSizePixel = 0
 			SliderIndicator.Position = UDim2.new(-0.00260408712, 0, 0.0363603085, 0)
-			SliderIndicator.Size = UDim2.new((default or 0) / max, 0, 0, 11)
+			SliderIndicator.Size = UDim2.new((start or 0) / max, 0, 0, 11)
 
 			SliderIndicatorCorner.Name = "SliderIndicatorCorner"
 			SliderIndicatorCorner.Parent = SliderIndicator
@@ -569,7 +569,7 @@ function library:CreateWindow(text, textgame, circletext)
 			Value.Position = UDim2.new(0.496277869, 0, 0, 0)
 			Value.Size = UDim2.new(0, 192, 0, 28)
 			Value.Font = Enum.Font.Gotham
-			Value.Text = tostring(start and math.floor((default / max) * (max - min) + min) or 0)
+			Value.Text = tostring(start and math.floor((start / max) * (max - min) + min) or 0)
 			Value.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Value.TextSize = 14.000
 			Value.TextXAlignment = Enum.TextXAlignment.Right
@@ -1422,4 +1422,4 @@ function library:CreateWindow(text, textgame, circletext)
 	end
 	return Tabs
 end
-return library
+return VLib
