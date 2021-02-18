@@ -1349,6 +1349,29 @@ function VLib:Window(text, textgame, circletext)
 
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 		end
+		
+		function ContainerItems:Header(text)
+			local Label = Instance.new("TextButton")
+			local LabelCorner = Instance.new("UICorner")
+
+			Label.Name = "Label"
+			Label.Parent = Container
+			Label.BackgroundColor3 = Color3.fromRGB(32, 33, 37)
+			Label.Size = UDim2.new(0, 403, 0, 28)
+			Label.AutoButtonColor = false
+			Label.Font = Enum.Font.ArialBold
+			Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Label.TextSize = 20.000
+			Label.Text = text
+			Label.BackgroundTransparency = 1
+
+			LabelCorner.CornerRadius = UDim.new(0, 6)
+			LabelCorner.Name = "LabelCorner"
+			LabelCorner.Parent = Label
+
+			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+		end
+
 
 		function ContainerItems:Textbox(text, disapper, callback)
 			local Textbox = Instance.new("TextButton")
