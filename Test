@@ -1,13 +1,3 @@
-for _,v in pairs(game.CoreGui:GetDescendants()) do
-
-if string.find(v.Name,"Library") then
-v:Destroy()
-
-end
-end
-
-wait()
-
 local VLib = {RainbowColorValue = 0, HueSelectionPosition = 0}
 function zigzag(X)
 	return math.acos(math.cos(X * math.pi)) / math.pi
