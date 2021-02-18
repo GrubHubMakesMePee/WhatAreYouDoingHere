@@ -120,7 +120,7 @@ function VLib:Window(text, textgame, circletext)
 	local MainTitle = Instance.new("TextLabel")
 	local Circle = Instance.new("Frame")
 	local CircleCorner = Instance.new("UICorner")
-	local CircleName = Instance.new("ImageLabel")
+	local CircleName = Instance.new("TextLabel")
 	local GameTitle = Instance.new("TextLabel")
 	local TabHolder = Instance.new("Frame")
 	local TabHoldLayout = Instance.new("UIListLayout")
@@ -172,22 +172,14 @@ function VLib:Window(text, textgame, circletext)
 	CircleCorner.Parent = Circle
 
 	CircleName.Name = "CircleName"
-    CircleName.Parent = Circle
-    CircleName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    CircleName.BackgroundTransparency = 1.000
-    CircleName.Size = UDim2.new(0, 38, 0, 37)
-    local Players = game:GetService("Players")
-
-    local player = Players.LocalPlayer
-
-    local userId = player.UserId
-    local thumbType = Enum.ThumbnailType.HeadShot
-    local thumbSize = Enum.ThumbnailSize.Size420x420
-    local content, isReady = Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
-
-    local imageLabel = CircleName
-    imageLabel.Image = content
-    
+	CircleName.Parent = Circle
+	CircleName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	CircleName.BackgroundTransparency = 1.000
+	CircleName.Size = UDim2.new(0, 38, 0, 37)
+	CircleName.Font = Enum.Font.Gotham
+	CircleName.Text = circletext
+	CircleName.TextColor3 = Color3.fromRGB(255, 255, 255)
+	CircleName.TextSize = 16.000
 
 	GameTitle.Name = "GameTitle"
 	GameTitle.Parent = LeftFrame
