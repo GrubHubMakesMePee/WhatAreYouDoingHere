@@ -78,7 +78,9 @@ ImagesRadarExecute.Text = "   "
 ImagesRadarExecute.TextColor3 = Color3.fromRGB(0, 0, 0)
 ImagesRadarExecute.TextSize = 14.000
 ImagesRadarExecute.MouseButton1Down:connect(function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua", true))()
+wait()
+game:GetService("CoreGui")["Specific-Universal"]:Destroy()
 end)
 
 Universal.Name = "Universal"
