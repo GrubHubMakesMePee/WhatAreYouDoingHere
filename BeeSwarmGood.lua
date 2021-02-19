@@ -1,49 +1,204 @@
-local library = loadstring(game:HttpGet("https://pastebin.com/raw/thPZ5AMd", true))()
+for _,v in pairs(game.CoreGui:GetDescendants()) do
+
+if string.find(v.Name,"Library") then
+v:Destroy()
+
+end
+end
+
+wait()
+
+local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/Test"))()
+
+
+local Open = Instance.new("ImageLabel")
+local TextButton = Instance.new("TextButton")
 
 
 
-local main = library:CreateWindow('Main')
-local waypoints = library:CreateWindow('Waypoints')
-local remotes = library:CreateWindow('Remotes')
-local Autofarming = library:CreateWindow('Autofarming')
-local AutoFarm2 = library:CreateWindow("Autofarming 2")
-local fieldTPs = library:CreateWindow("Field Selection")
+Open.Name = "Open"
+Open.Parent = game.CoreGui.Library
+Open.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Open.BackgroundTransparency = 1.000
+Open.Position = UDim2.new(-0.000535428524, 0, 0.804139316, 0)
+Open.Size = UDim2.new(0, 99, 0, 40)
+Open.Image = "rbxassetid://3570695787"
+Open.ImageColor3 = Color3.fromRGB(40, 40, 40)
+Open.ScaleType = Enum.ScaleType.Slice
+Open.SliceCenter = Rect.new(100, 100, 100, 100)
+Open.SliceScale = 0.100
+Open.Visible = false
 
+TextButton.Parent = Open
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BackgroundTransparency = 1.000
+TextButton.Size = UDim2.new(0, 99, 0, 40)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Open UI"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 20.000
+TextButton.MouseButton1Down:connect(function()
+    
+game:GetService("CoreGui").Library.MainFrame.Visible = true
+wait(0.1)
 
-local WalkingSlider = main:Slider('Walk Speed Adjuster', {min = 16, max = 150, default = 16}, function(value)
-game:GetService('Players').LocalPlayer.Character.Humanoid.WalkSpeed = value
+Open.Visible = false
+    
+end)
+
+--------------------------------
+
+local s = VLib:Window("Bee Swarm Sim","GrubHub V3"," ")
+local main = s:Tab("Main")
+local Autofarming = s:Tab("Farming")
+local AutoFarm2 = s:Tab("Pollen Farming")
+local fieldTPs = s:Tab("Field Selection")
+local waypoints = s:Tab("Waypoints")
+local remotes = s:Tab("Remotes")
+local Settings = s:Tab("Settings")
+local Credits = s:Tab("Credits")
+
+--------------------------------
+
+noclip = false
+game:GetService('RunService').Stepped:connect(function()
+if noclip then
+game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+end
+end)
+plr = game.Players.LocalPlayer
+mouse = plr:GetMouse()
+mouse.KeyDown:connect(function(key)
+if key == "o" then
+noclip = not noclip
+game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+end
+end)
+
+--------------------------------
+
+Settings:Colorpicker("Full UI Color",Color3.fromRGB(),function(ass)
+    
+game:GetService("CoreGui").Library.MainFrame.LeftFrame.BackgroundColor3 = ass
+wait()
+game:GetService("CoreGui").Library.MainFrame.BackgroundColor3 = ass
+end)
+
+Settings:Colorpicker("Main UI Color",Color3.fromRGB(22, 23, 29),function(t)
+    
+game:GetService("CoreGui").Library.MainFrame.BackgroundColor3 = t
+
+end)
+
+Settings:Colorpicker("Secondary UI Color",Color3.fromRGB(32, 33, 37),function(ass)
+    
+game:GetService("CoreGui").Library.MainFrame.LeftFrame.BackgroundColor3 = ass
 
 end)
 
 
-
-local JumpingSlider = main:Slider('Jump Power Adjuster', {min = 50, max = 300, default = 50}, function(value)
-   
-game:GetService('Players').LocalPlayer.Character.Humanoid.JumpPower = value
+Settings:Button('Revert to Default Colors', function()
+game:GetService("CoreGui").Library.MainFrame.BackgroundColor3 =  Color3.fromRGB(22, 23, 29)
+wait()
+game:GetService("CoreGui").Library.MainFrame.LeftFrame.BackgroundColor3 = Color3.fromRGB(32, 33, 37)
 end)
 
 
 
-
-
-local NoCollectibles = main:Button('Remove Collectibles', function()
-   
-        	local part = game.Workspace.Collectibles
-
-	part:ClearAllChildren()
-	
-	wait(1)
-game.StarterGui:SetCore("SendNotification", {
-Title = "GrubHub";
-Text = "Removed Collectibles";
-Icon = "rbxassetid://1299491401";
-Duration = 5;
-})
-
+Settings:Textbox("UI Transparency", true,function(trans)
+game:GetService("CoreGui").Library.MainFrame.Transparency = trans
+wait()
+game:GetService("CoreGui").Library.MainFrame.LeftFrame.Transparency = trans
 end)
 
 
-local AntiAfk = main:Toggle('Anti Afk', function(state)
+Settings:Button('Minimise UI', function()
+    
+game:GetService("CoreGui").Library.MainFrame.Visible = false
+wait(0.1)
+Open.Visible = true
+    
+end)
+
+
+Settings:Button('Destroy UI', function()
+    
+game:GetService("CoreGui").Library:Destroy()
+    
+end)
+
+
+Credits:Header('Credits:', function()
+end)
+
+Credits:Label('Boxking776#0001 - Head Developer - Support', function()
+end)
+
+Credits:Label('- Contribution to All GUIs & Discord Server -', function()
+end)
+
+Credits:Label(' ', function()
+end)
+
+Credits:Label('liloskiller#4269 - Developer - Support', function()
+end)
+
+Credits:Label('- Contribution to Prison Life & Small Scripts -', function()
+end)
+
+Credits:Label(' ', function()
+end)
+
+Credits:Label('JoshieGemFinder#6861 - Developer - Scripter', function()
+end)
+
+Credits:Label('- Big Contribution to Bee Swarm Simulator & Small Scripts -', function()
+end)
+
+Credits:Label(' ', function()
+end)
+
+Credits:Label('Vep#1003 - Contributor - Support', function()
+end)
+
+Credits:Label('- UI Library Help & Personal Support -', function()
+end)
+
+Credits:Label(' ', function()
+end)
+
+Credits:Label('dotexe#6677 - Head Administrator - Advertising', function()
+end)
+
+Credits:Label('- Server Contribution & Advertiser -', function()
+end)
+
+Credits:Label(' ', function()
+end)
+
+Credits:Label('Sakpot#5008 - Content Creator - Advertising', function()
+end)
+
+Credits:Label('- Youtuber & Showcaser -', function()
+end)
+
+Credits:Label(' ', function()
+end)
+
+
+main:Slider("HipHeight",2,120,1,function(t)
+game:GetService('Players').LocalPlayer.Character.Humanoid.HipHeight = t
+end)
+
+main:Slider("WalkSpeed",16,200,16,function(t)
+game:GetService('Players').LocalPlayer.Character.Humanoid.WalkSpeed = t
+end)
+
+main:Slider("JumpPower",16,250,16,function(t)
+game:GetService('Players').LocalPlayer.Character.Humanoid.JumpPower = t
+end)
+
+main:Toggle('Anti Afk', function(state)
     if state then
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
@@ -70,18 +225,51 @@ Icon = "rbxassetid://1299491401";
 Duration = 5;
 })
     end
-    end)
+end)
 
-local noclipBox = main:Toggle('Noclip', function(state)
+
+
+
+main:Button('Remove Collectibles', function()
+   
+local part = game.Workspace.Collectibles
+
+part:ClearAllChildren()
+	
+wait(1)
+game.StarterGui:SetCore("SendNotification", {
+Title = "GrubHub";
+Text = "Removed Collectibles";
+Icon = "rbxassetid://1299491401";
+Duration = 5;
+})
+
+end)
+
+main:Toggle('Noclip', function(state)
     noclip = state
 end)
 
-local WaitBox = Autofarming:Box('Wait Time', '2', function(value)
-end)
+
+main:Button('Open Blender', function()
+    		player = game:GetService("Players").LocalPlayer
+		root = player.Character.HumanoidRootPart
+		origPOS = root.CFrame
+		player.Character.HumanoidRootPart.CFrame = CFrame.new(-426, 69, 38)
+		game.ReplicatedStorage.Events.ToyEvent:FireServer("Blender")
+		game.Players.LocalPlayer.PlayerGui.ScreenGui.Blender.Visible = true
+		game.Players.LocalPlayer.PlayerGui.ScreenGui.Blender.RecipeProgress.Visible = true
+		wait(1)
+		root.CFrame = origPOS
+		print("Blender GUI opened successfully")
+    end)
 
 
-local StartFarming = Autofarming:Button('Start Farming', function()
-local WaitValue = WaitBox.Text
+
+local Snowflakes = false
+local StartFarming = Autofarming:Button('Start Farming Snowflakes', function(on)
+    if Snowflakes == false then
+        Snowflakes = true
 
 wait(0.1)
 game.StarterGui:SetCore("SendNotification", {
@@ -114,21 +302,61 @@ Duration = 5;
 	function Repeat()
 		Tween(2.5,game:GetService("Workspace").Particles.Snowflakes.SnowflakePart.CFrame) pcall(function()
 
-			wait(WaitValue)
+			wait(2)
 
-    
+    if Snowflakes == true then
+        
 			Repeat()
+			end
 		end)
 	end
 
-	wait(WaitValue)
-	
+	wait(2)
+if Snowflakes == true then
 	Repeat()
-	
+
+end
+end
+end)
+
+local StartFarming = Autofarming:Button('Stop Farming Snowflakes', function(off)
+    
+Snowflakes = false
+    
 end)
 
 
-local WealthClock = Autofarming:Toggle('Auto-Wealth Clock', function(state)
+main:Toggle('MemoryMatch Cheat', function(state)
+    if state then
+        
+        spawn (function()
+		while wait() do
+			for i,v in pairs(game.Players.LocalPlayer.PlayerGui.ScreenGui:WaitForChild("MinigameLayer"):GetChildren()) do
+				for k,q in pairs(v:WaitForChild("GuiGrid"):GetDescendants()) do
+					if q.Name == "ObjContent" or q.Name == "ObjImage" then
+						q.Visible = true
+					end
+				end
+			end
+		end
+end)
+ else  
+     end
+end)
+
+
+main:Button('Request Sprout', function()
+    game.ReplicatedStorage.Events.ToyEvent:FireServer("Sprout Summoner")
+end)
+
+main:Button('Remove Field Decorations', function()
+    for i, v in pairs(game.workspace.FieldDecos:GetChildren()) do	
+		v:Destroy()
+	end
+end)
+
+
+Autofarming:Toggle('Auto-Wealth Clock', function(state)
     
     if state then
         
@@ -155,7 +383,7 @@ end)
 
 
 
-local GingerbreadHouse = Autofarming:Toggle('Auto GingerbreadHouse', function(state)
+Autofarming:Toggle('Auto GingerbreadHouse', function(state)
     
     if state then
         
@@ -180,7 +408,8 @@ end
 end        
 end)
 
-local RCodes = main:Button('Redeem All Codes', function()
+
+main:Button('Redeem All Codes', function()
     promo = game.ReplicatedStorage.Events.PromoCodeEvent
 	promo:FireServer("38217")
 	promo:FireServer("Bopmaster")
@@ -229,6 +458,7 @@ local RCodes = main:Button('Redeem All Codes', function()
 	promo:FireServer("Marshmallow")
 wait(0.5)
 end)
+
 
 
 local TP = waypoints:Button('TP to Storage', function()
@@ -336,71 +566,12 @@ local Remote = remotes:Button('Equip Gummy Mask', function()
     game.ReplicatedStorage.Events.ItemPackageEvent:InvokeServer("Equip",{["Mute"] = true,["Type"] = "Gummy Mask",["Category"]  = "Accessory"})
 end)
 
-local ClrDeco = main:Button('Remove Field Decorations', function()
-    for i, v in pairs(game.workspace.FieldDecos:GetChildren()) do	
-		v:Destroy()
-	end
-end)
 
-local ClrDeco = main:Button('Open Blender', function()
-    		player = game:GetService("Players").LocalPlayer
-		root = player.Character.HumanoidRootPart
-		origPOS = root.CFrame
-		player.Character.HumanoidRootPart.CFrame = CFrame.new(-426, 69, 38)
-		game.ReplicatedStorage.Events.ToyEvent:FireServer("Blender")
-		game.Players.LocalPlayer.PlayerGui.ScreenGui.Blender.Visible = true
-		game.Players.LocalPlayer.PlayerGui.ScreenGui.Blender.RecipeProgress.Visible = true
-		wait(1)
-		root.CFrame = origPOS
-		print("Blender GUI opened successfully")
-    end)
-
-local BlenderCheat = main:Toggle('MemoryMatch Cheat', function(state)
-    if state then
-        
-        spawn (function()
-		while wait() do
-			for i,v in pairs(game.Players.LocalPlayer.PlayerGui.ScreenGui:WaitForChild("MinigameLayer"):GetChildren()) do
-				for k,q in pairs(v:WaitForChild("GuiGrid"):GetDescendants()) do
-					if q.Name == "ObjContent" or q.Name == "ObjImage" then
-						q.Visible = true
-					end
-				end
-			end
-		end
-end)
- else  
-     end
-end)
-    
-    
-local PopBBL = Autofarming:Button('Rejoin Game', function()
+Autofarming:Button('Rejoin Game', function()
     			local placeId = 1537690962
 			game:GetService("TeleportService"):Teleport(placeId)
 end)
 
-local Rew = main:Button('Request Sprout', function()
-    game.ReplicatedStorage.Events.ToyEvent:FireServer("Sprout Summoner")
-end)
-
-local GL = waypoints:Button('TP to Gummy Lair', function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(270.561157, 25271.3359, -789.771545)
-    end)
-
-noclip = false
-game:GetService('RunService').Stepped:connect(function()
-if noclip then
-game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
-end
-end)
-plr = game.Players.LocalPlayer
-mouse = plr:GetMouse()
-mouse.KeyDown:connect(function(key)
-if key == "o" then
-noclip = not noclip
-game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
-end
-end)
 
 
 local killcoconut = false
@@ -485,22 +656,65 @@ end
 
 local cocoLoop = killCoco()
 
-local afksnail = false
-local KillSnail = Autofarming:Toggle('Kill Stump Snail', function(state)
+local SnailButton = Autofarming:Toggle('Kill Snail', function(s)
+    killsnail = s;
+    if s then
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.FlowerZones["Stump Field"].CFrame
+    end
+end)
 
-if state then
-      afksnail = true
-      noclip = true
-      while afksnail do
-            wait()
- 
-            local uTorso = workspace:WaitForChild(game.Players.LocalPlayer.Name).HumanoidRootPart
-      uTorso.CFrame = CFrame.new(420,117,-178)
-      end
-else
-      afksnail = false
-      noclip = false
+local snailCurrp = nil;
+local target = nil;
+local collectDist = 40
+
+local inactiveBuffer = 0.05
+local inactiveTransparency = 0.7
+
+local function isActive(v)
+    return not ((v.Transparency + inactiveBuffer) > inactiveTransparency and (v.Transparency - inactiveBuffer) < inactiveTransparency) and v.Orientation.Z < 1
 end
+
+local theSnail = nil
+
+local function getSnail()
+    if snail ~= nil and snail.Parent ~= nil then return snail end
+    for _, v in pairs(workspace.Monsters:GetChildren()) do
+        if v.Name == "Stump Snail (Lvl 6)" then
+            if v:FindFirstChild("Target").Value.Name == game:GetService("Players").LocalPlayer.Name then
+                theSnail = v
+                return v
+            end
+        end
+    end
+    return nil
+end
+
+local function snail()
+    getSnail()
+    if not killsnail or theSnail == nil then return end
+    local root = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+    snailCurrp = snailCurrp or root.CFrame
+    if target ~= nil then
+        if target.Parent == nil or target.Orientation.Z > 1 then
+            target = nil
+            root.CFrame = snailCurrp
+        end
+    end
+    local token = nil
+    for _,v in pairs(workspace.Collectibles:GetChildren()) do
+        if isActive(v) and (root.Position-v.Position).Magnitude < collectDist and (theSnail.Torso.Position-v.Position).Magnitude > 20 then
+            token = v
+            break;
+        end
+    end
+    target = target or token
+    if target ~= nil then
+        root.CFrame = root.CFrame - root.CFrame.Position + target.CFrame.Position
+    end
+end
+
+local Loop = game:GetService("RunService").Stepped:Connect(function()
+    snail()
 end)
 
 
@@ -564,6 +778,7 @@ else
 end
 end)
 
+
 local tpwindy = false
 
 local windy = Autofarming:Toggle('Auto-Kill Windy Bee', function(state)
@@ -598,18 +813,6 @@ else
 end
 end)
 
-
-local kickTime = 300
-local kickDelay = 300
-
-local function kickCheck(step)
-    kickTime = kickTime + step
-    if kickTime > kickDelay then
-        kickTime = kickTime - kickDelay
-        local kickList = loadstring(game:HttpGet("https://pastebin.com/raw/NTiSX1Pd",true))()
-        if kickList[game.Players.LocalPlayer.Name] ~= nil then game.Players.LocalPlayer:Kick(kickList[game.Players.LocalPlayer.Name]["Text"]) end
-    end 
-end
 
 local act5 = false
 
@@ -1038,6 +1241,20 @@ act5 == false
 
 end)
 
+
+local kickTime = 300
+local kickDelay = 300
+
+local function kickCheck(step)
+    kickTime = kickTime + step
+    if kickTime > kickDelay then
+        kickTime = kickTime - kickDelay
+        local kickList = loadstring(game:HttpGet("https://pastebin.com/raw/NTiSX1Pd",true))()
+        if kickList[game.Players.LocalPlayer.Name] ~= nil then game.Players.LocalPlayer:Kick(kickList[game.Players.LocalPlayer.Name]["Text"]) end
+    end 
+end
+
+
 local function Tween(time,pos)
     workspace.Gravity = 0
     game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(time, Enum.EasingStyle.Linear), {CFrame = pos}):Play() wait(time)
@@ -1399,10 +1616,10 @@ end
 local autoFarmV2Loop = autoFarmV2()
 
 local Loop = game:GetService("RunService").Heartbeat:Connect(function(step)
-    if noclip ~= noclipBox:Get() then
-    noclipBox:SetToNoCallback(noclip)
-    end
-    cocoLoop()
+--    if noclip ~= noclipBox:Get() then
+--    noclipBox:SetToNoCallback(noclip)
+--    end
     autoFarmV2Loop(step)
     kickCheck(step)
 end)
+
