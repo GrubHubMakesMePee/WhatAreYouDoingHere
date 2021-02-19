@@ -1,21 +1,60 @@
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/YummySource",true))()
+for _,v in pairs(game.CoreGui:GetDescendants()) do
 
-------------------------------------------------------------------------------
+if string.find(v.Name,"Library") then
+v:Destroy()
 
-local main = library:CreateWindow('Main')
-local main2 = library:CreateWindow('Main')
+end
+end
+
+wait()
+
+local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/Test"))()
 
 
-local Farming = main:Section('Farming')
-local Other = main2:Section('Other')
+local Open = Instance.new("ImageLabel")
+local TextButton = Instance.new("TextButton")
 
-------------------------------------------------------------------------------
+
+
+Open.Name = "Open"
+Open.Parent = game.CoreGui.Library
+Open.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Open.BackgroundTransparency = 1.000
+Open.Position = UDim2.new(-0.000535428524, 0, 0.804139316, 0)
+Open.Size = UDim2.new(0, 99, 0, 40)
+Open.Image = "rbxassetid://3570695787"
+Open.ImageColor3 = Color3.fromRGB(40, 40, 40)
+Open.ScaleType = Enum.ScaleType.Slice
+Open.SliceCenter = Rect.new(100, 100, 100, 100)
+Open.SliceScale = 0.100
+Open.Visible = false
+
+TextButton.Parent = Open
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BackgroundTransparency = 1.000
+TextButton.Size = UDim2.new(0, 99, 0, 40)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Open UI"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 20.000
+TextButton.MouseButton1Down:connect(function()
+    
+game:GetService("CoreGui").Library.MainFrame.Visible = true
+wait(0.1)
+
+Open.Visible = false
+    
+end)
+
+
+local s = VLib:Window("Infectious Smile","GrubHub V3"," ")
+local Main = s:Tab("Main")
+local Settings = s:Tab("Settings")
+local Credits = s:Tab("Credits")
 
 local part = Instance.new("Part")
 local part2 = Instance.new("Part")
 local part3 = Instance.new("Part")
-
-------------------------------------------------------------------------------
 
 part.Name = "JurrasicPart1"
 part.Anchored = true
@@ -46,22 +85,23 @@ part3.CFrame = CFrame.new(-347.206757, 3, 23.9502506)
 part3.Transparency = 1
 part3.CanCollide = false
 
-------------------------------------------------------------------------------
 
-local hipHeightSlider = main2:Slider('Hip Height', {min = 0, max = 20, default = 0}, function(value)
-    game:GetService('Players').LocalPlayer.Character.Humanoid.HipHeight = value
+
+
+Main:Slider("HipHeight",0,100,1,function(t)
+game:GetService('Players').LocalPlayer.Character.Humanoid.HipHeight = t
 end)
 
-------------------------------------------------------------------------------
-
-local Reset = main2:Button('Reset Character', function()
-    game:GetService("Players").LocalPlayer.Character.Ragdoll.Ragdoll:FireServer()
+Main:Slider("WalkSpeed",16,100,16,function(t)
+game:GetService('Players').LocalPlayer.Character.Humanoid.WalkSpeed = t
 end)
 
-------------------------------------------------------------------------------
+Main:Slider("JumpPower",16,250,16,function(t)
+game:GetService('Players').LocalPlayer.Character.Humanoid.JumpPower = t
+end)
 
 
-local RemoveKillBricks = main:Button('Remove Kill Bricks', function()
+Main:Button("Remove Kill Bricks", function()
 
 for _,v in pairs(game.workspace:GetDescendants()) do
 
@@ -80,23 +120,10 @@ Duration = 5;
 
 end)
 
-------------------------------------------------------------------------------
 
-local walkspeedBox = main:Box('Walkspeed', '16', function(value)
-    game:GetService('Players').LocalPlayer.Character.Humanoid.WalkSpeed = value
-end)
+Main:Textbox('Play Music', function(value)
 
-------------------------------------------------------------------------------
-
-local jumpspeedBox = main:Box('JumpPower', '50', function(value)
-    game:GetService('Players').LocalPlayer.Character.Humanoid.JumpPower = value
-end)
-
-------------------------------------------------------------------------------
-
-local PlaySexyMusic = main2:Box('Play Music', 'Sound ID', function(value)
-
-    game.workspace.Sounds.Earthquake.SoundId = "rbxassetid://"..value
+game.workspace.Sounds.Earthquake.SoundId = "rbxassetid://"..value
 
 wait(2)
 
@@ -112,13 +139,15 @@ Duration = 5;
 
 end)
 
-------------------------------------------------------------------------------
 
-local DestroyAntiCheat = main:Toggle('Remove Anti-Cheat', function(state)
-    if state then
+Main:Toggle("Destroy Anti-Cheat",function(t)
+
+if t then
 
 game:GetService("Workspace").Map.AntiHack:Destroy()
 game.Players.LocalPlayer.AntiFly:Destroy()
+
+wait(0.1)
 
 game.StarterGui:SetCore("SendNotification", {
 Title = "GrubHub";
@@ -126,15 +155,11 @@ Text = "Destroyed";
 Icon = "rbxassetid://1299491401";
 Duration = 5;
 })
-
-    else
-        
-    end
+end       
 end)
 
-------------------------------------------------------------------------------
 
-local BuffBat = main:Button('Buff Bat', function()
+Main:Button('Buff Bat', function()
 
 game.Players.LocalPlayer.Character.Bat.MaxUses:Destroy()
 game.Players.LocalPlayer.Character.Bat.Cooldown.Value = 0.01
@@ -148,24 +173,8 @@ Duration = 5;
     
 end)
 
-------------------------------------------------------------------------------
 
-local TpWeapons = main2:Button('TP Weapons', function()
-    workspace.Map.HumanBase.Vendor.BottleCollection.Bottle.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-workspace.Map.HumanBase.Vendor.BatCollection.Bat.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-
-game.StarterGui:SetCore("SendNotification", {
-Title = "GrubHub";
-Text = "Teleported Weapons to your position.";
-Icon = "rbxassetid://1299491401";
-Duration = 5;
-})
-
-end)
-
-------------------------------------------------------------------------------
-
-local BuffBottle = main:Button('Buff Bottle', function()
+Main:Button('Buff Bottle', function()
 
 
 game.Players.LocalPlayer.Character.Bottle.MaxUses:Destroy()
@@ -179,9 +188,24 @@ Duration = 5;
 })
 
 end)
-------------------------------------------------------------------------------
 
-local StealthMode = main2:Toggle('Neutral Mode', function(state)
+
+
+Main:Button('TP Weapons', function()
+    workspace.Map.HumanBase.Vendor.BottleCollection.Bottle.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+workspace.Map.HumanBase.Vendor.BatCollection.Bat.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+
+game.StarterGui:SetCore("SendNotification", {
+Title = "GrubHub";
+Text = "Teleported Weapons to your position.";
+Icon = "rbxassetid://1299491401";
+Duration = 5;
+})
+
+end)
+
+
+Main:Toggle('Neutral Mode', function(state)
     if state then
 
 game.Players.LocalPlayer.Team = Human
@@ -192,15 +216,12 @@ Text = "Switched to Neutral";
 Icon = "rbxassetid://1299491401";
 Duration = 5;
 })
-
-    else
         
     end
 end)
 
-------------------------------------------------------------------------------
 
-local signBypass = main:Box('Change Sign Text', 'Text', function(value)
+Main:Textbox('Change Sign Text', function(value)
     game:GetService("Workspace").Map.ConstantTerrain.CustomizeSign.SurfaceGui.TextLabel.Text = value
     
     game.StarterGui:SetCore("SendNotification", {
@@ -211,117 +232,8 @@ Duration = 5;
 })
 end)
 
-------------------------------------------------------------------------------
 
-local GetSkins = main2:Toggle('Get all skins', function(state)
-
-    if state then
-
-wait(0.5)
-
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Diamond.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Flame.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Checkers.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Blue.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Green.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Orange.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Yellow.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Red.Value = true
-
-wait(0.5)
-
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Diamond.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Flame.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Checkers.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Blue.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Green.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Orange.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Yellow.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Red.Value = true
-
-wait(0.5)
-
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Diamond.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Flame.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Checkers.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Blue.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Green.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Orange.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Yellow.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Red.Value = true
-
-wait(0.5)
-
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Diamond.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Flame.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Checkers.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Blue.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Green.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Orange.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Yellow.Value = true
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Red.Value = true
-
-game.StarterGui:SetCore("SendNotification", {
-Title = "GrubGub";
-Text = "Redeemed Skins";
-Icon = "rbxassetid://1299491401";
-Duration = 5;
-})
-
-    else
-        
-wait(0.5)
-
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Diamond.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Flame.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Checkers.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Blue.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Green.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Orange.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Yellow.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Bat.Red.Value = false
-
-wait(0.5)
-
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Diamond.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Flame.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Checkers.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Blue.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Green.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Orange.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Yellow.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Knife.Red.Value = false
-
-wait(0.5)
-
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Diamond.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Flame.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Checkers.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Blue.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Green.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Orange.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Yellow.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Shotgun.Red.Value = false
-
-wait(0.5)
-
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Diamond.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Flame.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Checkers.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Blue.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Green.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Orange.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Yellow.Value = false
-game:GetService("Players").LocalPlayer.Marketplace.Skins.Handgun.Red.Value = false
-
-    end
-
-end)
-
-------------------------------------------------------------------------------
-
-
-local GoToEnd = main2:Button('Go To End', function()
+Main:Button('Go To End', function()
     function Tween(time,pos)
 		pcall(function()
 			workspace.Gravity = 0
@@ -357,9 +269,8 @@ Duration = 5;
 
 end)
 
-------------------------------------------------------------------------------
 
-local GoToEnd = main:Button('Delete Final Base Door', function()
+Main:Button('Delete Final Base Door', function()
 
 game:GetService("Workspace").Map.ConstantTerrain.KillGateSwitcher.Gate:Destroy()
 
@@ -372,9 +283,7 @@ Duration = 3;
 
 end)
 
-------------------------------------------------------------------------------
-
-local DestroyAllYellowDoors = main2:Toggle('Destroy Orange Doors', function(state)
+Main:Toggle('Destroy Orange Doors', function(state)
     if state then
 
 for _,v in pairs(game.workspace:GetDescendants()) do
@@ -395,4 +304,110 @@ else
 end
 end)
 
-------------------------------------------------------------------------------
+Settings:Colorpicker("Full UI Color",Color3.fromRGB(),function(ass)
+    
+game:GetService("CoreGui").Library.MainFrame.LeftFrame.BackgroundColor3 = ass
+wait()
+game:GetService("CoreGui").Library.MainFrame.BackgroundColor3 = ass
+end)
+
+Settings:Colorpicker("Main UI Color",Color3.fromRGB(22, 23, 29),function(t)
+    
+game:GetService("CoreGui").Library.MainFrame.BackgroundColor3 = t
+
+end)
+
+Settings:Colorpicker("Secondary UI Color",Color3.fromRGB(32, 33, 37),function(ass)
+    
+game:GetService("CoreGui").Library.MainFrame.LeftFrame.BackgroundColor3 = ass
+
+end)
+
+
+Settings:Button('Revert to Default Colors', function()
+game:GetService("CoreGui").Library.MainFrame.BackgroundColor3 =  Color3.fromRGB(22, 23, 29)
+wait()
+game:GetService("CoreGui").Library.MainFrame.LeftFrame.BackgroundColor3 = Color3.fromRGB(32, 33, 37)
+end)
+
+
+
+Settings:Textbox("UI Transparency", true,function(trans)
+game:GetService("CoreGui").Library.MainFrame.Transparency = trans
+wait()
+game:GetService("CoreGui").Library.MainFrame.LeftFrame.Transparency = trans
+end)
+
+
+Settings:Button('Minimise UI', function()
+    
+game:GetService("CoreGui").Library.MainFrame.Visible = false
+wait(0.1)
+Open.Visible = true
+    
+end)
+
+
+Settings:Button('Destroy UI', function()
+    
+game:GetService("CoreGui").Library:Destroy()
+    
+end)
+
+
+Credits:Header('Credits:', function()
+end)
+
+Credits:Label('Boxking776#0001 - Head Developer - Support', function()
+end)
+
+Credits:Label('- Contribution to All GUIs & Discord Server -', function()
+end)
+
+Credits:Label(' ', function()
+end)
+
+Credits:Label('liloskiller#4269 - Developer - Support', function()
+end)
+
+Credits:Label('- Contribution to Prison Life & Small Scripts -', function()
+end)
+
+Credits:Label(' ', function()
+end)
+
+Credits:Label('JoshieGemFinder#6861 - Developer - Scripter', function()
+end)
+
+Credits:Label('- Big Contribution to Bee Swarm Simulator & Small Scripts -', function()
+end)
+
+Credits:Label(' ', function()
+end)
+
+Credits:Label('Vep#1003 - Contributor - Support', function()
+end)
+
+Credits:Label('- UI Library Help & Personal Support -', function()
+end)
+
+Credits:Label(' ', function()
+end)
+
+Credits:Label('dotexe#6677 - Head Administrator - Advertising', function()
+end)
+
+Credits:Label('- Server Contribution & Advertiser -', function()
+end)
+
+Credits:Label(' ', function()
+end)
+
+Credits:Label('Sakpot#5008 - Content Creator - Advertising', function()
+end)
+
+Credits:Label('- Youtuber & Showcaser -', function()
+end)
+
+Credits:Label(' ', function()
+end)
