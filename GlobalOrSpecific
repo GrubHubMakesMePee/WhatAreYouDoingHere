@@ -1,0 +1,129 @@
+for _,v in pairs(game.CoreGui:GetDescendants()) do
+
+	if string.find(v.Name,"SpecificUniversal") then
+		v:Destroy()
+
+	end
+end
+
+local SpecificUniversal = Instance.new("ScreenGui")
+local Open = Instance.new("ImageLabel")
+local Detect = Instance.new("ImageLabel")
+local ImagesRadar = Instance.new("ImageLabel")
+local ImagesRadarText = Instance.new("TextLabel")
+local ImagesRadarExecute = Instance.new("TextButton")
+local Universal = Instance.new("ImageLabel")
+local ImagesGlobe = Instance.new("ImageLabel")
+local ImagesRadarText_2 = Instance.new("TextLabel")
+local ImagesGlobeExecute = Instance.new("TextButton")
+
+--Properties:
+
+SpecificUniversal.Name = "Specific-Universal"
+SpecificUniversal.Parent = game.CoreGui
+
+Open.Name = "Open"
+Open.Parent = SpecificUniversal
+Open.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Open.BackgroundTransparency = 1.000
+Open.Position = UDim2.new(0.380163342, 0, 0.365439147, 0)
+Open.Size = UDim2.new(0, 396, 0, 182)
+Open.Image = "rbxassetid://3570695787"
+Open.ImageColor3 = Color3.fromRGB(40, 40, 40)
+Open.ScaleType = Enum.ScaleType.Slice
+Open.SliceCenter = Rect.new(100, 100, 100, 100)
+Open.SliceScale = 0.100
+
+Detect.Name = "Detect"
+Detect.Parent = SpecificUniversal
+Detect.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Detect.BackgroundTransparency = 1.000
+Detect.Position = UDim2.new(0.400016367, 0, 0.382000923, 0)
+Detect.Size = UDim2.new(0, 150, 0, 140)
+Detect.Image = "rbxassetid://3570695787"
+Detect.ImageColor3 = Color3.fromRGB(126, 126, 126)
+Detect.ScaleType = Enum.ScaleType.Slice
+Detect.SliceCenter = Rect.new(100, 100, 100, 100)
+Detect.SliceScale = 0.100
+
+ImagesRadar.Name = "Images/Radar"
+ImagesRadar.Parent = Detect
+ImagesRadar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImagesRadar.BackgroundTransparency = 1.000
+ImagesRadar.Position = UDim2.new(0.133333325, 0, -0.0285714287, 0)
+ImagesRadar.Size = UDim2.new(0, 110, 0, 110)
+ImagesRadar.Image = "rbxassetid://149177741"
+
+ImagesRadarText.Name = "Images/Radar/Text"
+ImagesRadarText.Parent = ImagesRadar
+ImagesRadarText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImagesRadarText.BackgroundTransparency = 1.000
+ImagesRadarText.Position = UDim2.new(-0.181818187, 0, 0.854545474, 0)
+ImagesRadarText.Size = UDim2.new(0, 150, 0, 50)
+ImagesRadarText.Font = Enum.Font.RobotoCondensed
+ImagesRadarText.Text = "Detect Specific Game"
+ImagesRadarText.TextColor3 = Color3.fromRGB(0, 0, 0)
+ImagesRadarText.TextScaled = true
+ImagesRadarText.TextSize = 14.000
+ImagesRadarText.TextWrapped = true
+
+ImagesRadarExecute.Name = "Images/Radar/Execute"
+ImagesRadarExecute.Parent = ImagesRadar
+ImagesRadarExecute.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImagesRadarExecute.BackgroundTransparency = 1.000
+ImagesRadarExecute.Position = UDim2.new(-0.172727272, 0, 0.0363636352, 0)
+ImagesRadarExecute.Size = UDim2.new(0, 150, 0, 139)
+ImagesRadarExecute.Font = Enum.Font.SourceSans
+ImagesRadarExecute.Text = "   "
+ImagesRadarExecute.TextColor3 = Color3.fromRGB(0, 0, 0)
+ImagesRadarExecute.TextSize = 14.000
+ImagesRadarExecute.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua", true))()
+end)
+
+Universal.Name = "Universal"
+Universal.Parent = SpecificUniversal
+Universal.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Universal.BackgroundTransparency = 1.000
+Universal.Position = UDim2.new(0.509650826, 0, 0.382000923, 0)
+Universal.Size = UDim2.new(0, 150, 0, 140)
+Universal.Image = "rbxassetid://3570695787"
+Universal.ImageColor3 = Color3.fromRGB(126, 126, 126)
+Universal.ScaleType = Enum.ScaleType.Slice
+Universal.SliceCenter = Rect.new(100, 100, 100, 100)
+Universal.SliceScale = 0.100
+
+ImagesGlobe.Name = "Images/Globe"
+ImagesGlobe.Parent = Universal
+ImagesGlobe.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImagesGlobe.BackgroundTransparency = 1.000
+ImagesGlobe.Position = UDim2.new(0.233333349, 0, 0.0714285746, 0)
+ImagesGlobe.Size = UDim2.new(0, 82, 0, 81)
+ImagesGlobe.Image = "rbxassetid://27854793"
+
+ImagesRadarText_2.Name = "Images/Radar/Text"
+ImagesRadarText_2.Parent = ImagesGlobe
+ImagesRadarText_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImagesRadarText_2.BackgroundTransparency = 1.000
+ImagesRadarText_2.Position = UDim2.new(-0.425720632, 0, 0.965656579, 0)
+ImagesRadarText_2.Size = UDim2.new(0, 150, 0, 50)
+ImagesRadarText_2.Font = Enum.Font.RobotoCondensed
+ImagesRadarText_2.Text = "Universal Features"
+ImagesRadarText_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+ImagesRadarText_2.TextScaled = true
+ImagesRadarText_2.TextSize = 14.000
+ImagesRadarText_2.TextWrapped = true
+
+ImagesGlobeExecute.Name = "Images/Globe/Execute"
+ImagesGlobeExecute.Parent = ImagesGlobe
+ImagesGlobeExecute.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImagesGlobeExecute.BackgroundTransparency = 1.000
+ImagesGlobeExecute.Position = UDim2.new(-0.416452318, 0, -0.147498786, 0)
+ImagesGlobeExecute.Size = UDim2.new(0, 150, 0, 139)
+ImagesGlobeExecute.Font = Enum.Font.SourceSans
+ImagesGlobeExecute.Text = "   "
+ImagesGlobeExecute.TextColor3 = Color3.fromRGB(0, 0, 0)
+ImagesGlobeExecute.TextSize = 14.000
+ImagesGlobeExecute.MouseButton1Down:connect(function()
+	ImagesRadarText_2.Text = "Coming Soon"	
+end)
