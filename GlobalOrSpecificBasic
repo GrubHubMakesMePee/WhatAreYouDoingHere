@@ -80,7 +80,7 @@ ImagesRadarExecute.TextSize = 14.000
 ImagesRadarExecute.MouseButton1Down:connect(function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/testingyourpatience.lua", true))()
 	wait()
-game.CoreGui.Specific-Universal:Destroy
+game:GetService("CoreGui")["Specific-Universal"]:Destroy()
 end)
 
 Universal.Name = "Universal"
