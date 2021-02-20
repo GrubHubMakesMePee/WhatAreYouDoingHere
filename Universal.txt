@@ -50,7 +50,7 @@ end)
 
 local s = VLib:Window("Universal Features","GrubHub V3"," ")
 
-local main = s:Tab("Universal")
+local Universal = s:Tab("Universal")
 local Settings = s:Tab("Settings")
 local Credits = s:Tab("Credits")
 
@@ -189,28 +189,28 @@ end
 end)
 
 
-main:Slider("HipHeight",2,120,1,function(t)
+Universal:Slider("HipHeight",2,120,1,function(t)
 game:GetService('Players').LocalPlayer.Character.Humanoid.HipHeight = t
 end)
 
-main:Slider("WalkSpeed",16,200,16,function(t)
+Universal:Slider("WalkSpeed",16,200,16,function(t)
 game:GetService('Players').LocalPlayer.Character.Humanoid.WalkSpeed = t
 end)
 
-main:Slider("JumpPower",16,250,16,function(t)
+Universal:Slider("JumpPower",16,250,16,function(t)
 game:GetService('Players').LocalPlayer.Character.Humanoid.JumpPower = t
 end)
 
-main:Slider("Field Of View",1,120,70,function(pog)
+Universal:Slider("Field Of View",1,120,70,function(pog)
 game:GetService'Workspace'.Camera.FieldOfView = pog
 end)
 
 
-main:Toggle('Noclip', function(state)
+Universal:Toggle('Noclip', function(state)
     noclip = state
 end)
 
-main:Button('Fly (Toggle E)', function(state)
+Universal:Button('Fly (Toggle E)', function(state)
 
 repeat wait()
    until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("UpperTorso") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid")
@@ -296,7 +296,7 @@ end)
 
 
 
-main:Button('FreeCam (Toggle P)', function(state)
+Universal:Button('FreeCam (Toggle P)', function(state)
  
  ToggleKey = Enum.KeyCode.P
 SprintKey = Enum.KeyCode.L
@@ -444,7 +444,7 @@ local plrs = game:GetService("Players"):GetPlayers()
 local plrNames = {}
 for n, p in pairs(plrs) do table.insert(plrNames,p.Name) end
 table.sort(plrNames)
-local tpdropdown = main:Dropdown("TP to Player: ", plrNames, function(n)
+local tpdropdown = Universal:Dropdown("TP to Player: ", plrNames, function(n)
     game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players")[n].Character.HumanoidRootPart.CFrame
 end)
 
@@ -463,7 +463,7 @@ game:GetService("Players").PlayerRemoving:Connect(updateDropdown)
 
 
 
-main:Toggle('Infinite Jump', function(state)
+Universal:Toggle('Infinite Jump', function(state)
 if state then
     InfiniteJumpEnabled = true
 game:GetService("UserInputService").JumpRequest:connect(function()
@@ -478,7 +478,7 @@ end
 end)
 
 
-main:Toggle('Anti Afk', function(state)
+Universal:Toggle('Anti Afk', function(state)
     if state then
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
@@ -507,7 +507,7 @@ Duration = 5;
     end
 end)
 
-main:Toggle('Universal ESP', function(state)
+Universal:Toggle('Universal ESP', function(state)
     if state then
 local Holder = Instance.new("Folder", game.CoreGui)
 Holder.Name = "ESP"
@@ -615,7 +615,7 @@ local bambams = {}
 
 local flinging = false
 
-main:Toggle('Fling', function(state)
+Universal:Toggle('Fling', function(state)
 flinging = state
 if state then
 power = 500
@@ -647,7 +647,7 @@ end)
 
 
 
-main:Button('Copy JOBID to Clipboard', function()
+Universal:Button('Copy JOBID to Clipboard', function()
     setclipboard(tostring(game.JobId))
     game.StarterGui:SetCore("SendNotification", {
 Title = "GrubHub";
