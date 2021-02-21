@@ -132,7 +132,7 @@ Submit.MouseButton1Down:connect(function()
 
 	if gameScript ~= nil then
 		KeyScreen:Destroy()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/" .. gameScript,true))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/GrubHubMakesMePee/DumbBurger/main/" .. gameScript,true))()
 	else 
 
 
@@ -150,7 +150,7 @@ Submit.MouseButton1Down:connect(function()
 
 			if gameScriptPremium ~= nil then
 				KeyScreen:Destroy()
-				loadstring(game:HttpGet("https://raw.githubusercontent.com/StopReverseEngineeringMyScripts/WhatAreYouDoingHere/main/" .. gameScriptPremium,true))()
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/GrubHubMakesMePee/DumbBurger/main/" .. gameScriptPremium,true))()
 
 
 			end
